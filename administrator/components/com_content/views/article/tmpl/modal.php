@@ -86,6 +86,7 @@ JFactory::getDocument()->addScriptDeclaration('
 	<button class="btn btn-primary" type="button" onclick="Joomla.submitbutton('article.apply');"><?php echo JText::_('JTOOLBAR_APPLY') ?></button>
 	<button class="btn btn-primary" type="button" onclick="Joomla.submitbutton('article.save');"><?php echo JText::_('JTOOLBAR_SAVE') ?></button>
 	<button class="btn" type="button" onclick="Joomla.submitbutton('article.cancel');"><?php echo JText::_('JCANCEL') ?></button>
+	<button class="btn" type="button" onclick="Joomla.submitbutton('article.share');"><?php echo JText::_('JSHARE') ?></button>
 </div>
 
 <div class="clearfix"> </div>

@@ -98,6 +98,7 @@ class ContentViewArticle extends JViewLegacy
 			JToolbarHelper::save('article.save');
 			JToolbarHelper::save2new('article.save2new');
 			JToolbarHelper::cancel('article.cancel');
+			JToolbarHelper::cancel('article.cancel');
 		}
 		else
 		{
