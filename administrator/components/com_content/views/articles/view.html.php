@@ -127,6 +127,7 @@ class ContentViewArticles extends JViewLegacy
 			JToolbarHelper::custom('articles.featured', 'featured.png', 'featured_f2.png', 'JFEATURE', true);
 			JToolbarHelper::custom('articles.unfeatured', 'unfeatured.png', 'featured_f2.png', 'JUNFEATURE', true);
 			JToolbarHelper::archiveList('articles.archive');
+			JToolbarHelper::share('articles.share');
 			JToolbarHelper::checkin('articles.checkin');
 		}
 
