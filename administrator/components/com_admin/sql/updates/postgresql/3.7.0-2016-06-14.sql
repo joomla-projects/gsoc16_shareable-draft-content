@@ -1,6 +1,6 @@
 CREATE TABLE "#__share_draft" (
-  "id" serial NOT NULL AUTO_INCREMENT,
-  "articleid" serial NOT NULL,
+  "id" serial unsigned NOT NULL AUTO_INCREMENT,
+  "articleId" serial unsigned NOT NULL,
   "title" character varying(255) NOT NULL,
   "created" datetime NOT NULL,
   "modified" character varying(255) NOT NULL,
