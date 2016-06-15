@@ -41,7 +41,6 @@ class ContentModelArticles extends JModelList
 				'created_by', 'a.created_by',
 				'created_by_alias', 'a.created_by_alias',
 				'ordering', 'a.ordering',
-				'share', 'a.share',
 				'featured', 'a.featured',
 				'language', 'a.language',
 				'hits', 'a.hits',
