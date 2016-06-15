@@ -1,5 +1,6 @@
 CREATE TABLE [#__share_draft] (
 	[id] [int] NOT NULL AUTO_INCREMENT,
+	[articleid] [int] NOT NULL,
 	[title] [nvarchar](255) NOT NULL,
 	[created] [datetime] NOT NULL,
 	[modified] [datetime] NOT NULL,
