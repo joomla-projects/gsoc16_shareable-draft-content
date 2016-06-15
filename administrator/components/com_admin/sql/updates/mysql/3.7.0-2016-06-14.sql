@@ -6,3 +6,4 @@ CREATE TABLE if NOT EXISTS  `#__share_draft`(
   `sharelink` varchar(255) NOT NULL, 
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8;
+
