@@ -9,3 +9,7 @@ CREATE TABLE [#__share_draft] (
       [id] ASC
     )
 ) ON [PRIMARY];
+
+
+
+
