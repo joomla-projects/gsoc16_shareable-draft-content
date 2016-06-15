@@ -4,7 +4,7 @@ CREATE TABLE "#__share_draft" (
   "created" datetime NOT NULL,
   "modified" character varying(255) NOT NULL,
   "sharelink" character varying(255) NOT NULL,
-  PRIMARY KEY ("type_id")
+  PRIMARY KEY ("id")
 );
 
 
