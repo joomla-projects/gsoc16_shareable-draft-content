@@ -4,7 +4,7 @@ CREATE TABLE [#__share_draft] (
 	[title] [nvarchar](255) NOT NULL,
 	[created] [datetime] NOT NULL,
 	[modified] [datetime] NOT NULL,
-	[sharelink] [nvarchar](255) NOT NULL,
+	[sharetoken] [nvarchar](255) NOT NULL,
         CONSTRAINT [PK_#__id] PRIMARY KEY CLUSTERED
     (
       [id] ASC
