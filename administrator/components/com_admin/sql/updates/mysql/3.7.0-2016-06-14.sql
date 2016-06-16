@@ -4,6 +4,6 @@ CREATE TABLE if NOT EXISTS  `#__share_draft`(
   `title` varchar(255) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL, 
-  `sharelink` varchar(255) NOT NULL, 
+  `sharetoken` varchar(255) NOT NULL, 
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8;
