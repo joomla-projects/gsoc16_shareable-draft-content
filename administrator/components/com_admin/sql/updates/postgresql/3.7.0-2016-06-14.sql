@@ -7,6 +7,3 @@ CREATE TABLE "#__share_draft" (
   "sharelink" character varying(255) NOT NULL,
   PRIMARY KEY ("id")
 );
-
-
-
