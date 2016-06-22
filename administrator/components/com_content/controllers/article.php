@@ -144,6 +144,41 @@ class ContentControllerArticle extends JControllerForm
 		return parent::batch($model);
 	}
 
+	public function shareTokenGenerate($length = 16)
+	{
+		jimport( 'joomla.user.helper' );
+		$salt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		$len = strlen($salt);
+		$token = '';
+
+		$stat = @stat(FILE);
+
+		//if(empty($stat)!==is_array($stat))
+		$stat = array(php_uname());
+		mt_srand(crc32(microtime() . implode('|', $stat)));
+		for ($i = 0; $i < $length; $i ++)
+		{
+			$token .= $salt[mt_rand(0, $len -1)];
+		}
+		return $token;
+	}
+
+	public function shareDraft()
+	{
+		// Get the model
+		$model = $this->getModel();
+		$token = $this->shareTokenGenerate();
+		$return = $model->shareToken($token);
+		if($return)
+		{
+			echo "token saved";
+		}
+		else
+		{
+			echo "error";
+		}
+	}
+
 	/**
 	 * Function that allows child controller access to model data after the data has been saved.
 	 *

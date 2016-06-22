@@ -680,6 +680,39 @@ class ContentModelArticle extends JModelAdmin
 		return true;
 	}
 
+	public function shareToken($token)
+	{
+
+		// perform whatever you want on each item checked in the list
+		$jinput = JFactory::getApplication()->input;
+
+		$jform = $jinput->getArray(array('jform' => array('title' => 'string')));
+		$title = $jform['jform']['title'];
+
+		// Get a db connection.
+		$db = $this->getDbo();
+
+		// Create a new query object.
+		$query = $db->getQuery(true);
+
+		// Insert columns.
+		$columns = array('articleId', 'title', 'sharetoken');
+
+		// Insert values.
+		$values = array($db->quote($jinput->get("id")), $db->quote($title), $db->quote($token));
+
+		// Prepare the insert query.
+		$query
+			->insert($db->quoteName('#__share_draft'))
+			->columns($db->quoteName($columns))
+			->values(implode(',', $values));
+
+		// Set the query using our newly populated query object and execute it.
+		$db->setQuery($query);
+		return $db->execute();
+	}
+
+
 	/**
 	 * A protected method to get a set of ordering conditions.
 	 *

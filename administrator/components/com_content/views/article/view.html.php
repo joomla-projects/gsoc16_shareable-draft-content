@@ -127,6 +127,7 @@ class ContentViewArticle extends JViewLegacy
 			if ($this->state->params->get('save_history', 0) && $canDo->get('core.edit'))
 			{
 				JToolbarHelper::versions('com_content.article', $this->item->id);
+				JToolbarHelper::custom('article.shareDraft', 'share.png', 'share.png','Share', false);
 			}
 
 			JToolbarHelper::cancel('article.cancel', 'JTOOLBAR_CLOSE');
