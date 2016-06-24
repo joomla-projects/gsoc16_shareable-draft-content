@@ -144,7 +144,7 @@ class ContentControllerArticle extends JControllerForm
 		return parent::batch($model);
 	}
 
-	public function shareTokenGenerate($length = 16)
+	public function shareTokenGenerate()
 	{
 		jimport( 'joomla.user.helper' );
 	        $token = JUserHelper::genRandomPassword(16);
