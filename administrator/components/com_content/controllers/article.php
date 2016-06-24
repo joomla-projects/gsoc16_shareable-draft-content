@@ -147,19 +147,7 @@ class ContentControllerArticle extends JControllerForm
 	public function shareTokenGenerate($length = 16)
 	{
 		jimport( 'joomla.user.helper' );
-		$salt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		$len = strlen($salt);
-		$token = '';
-
-		$stat = @stat(FILE);
-
-		//if(empty($stat)!==is_array($stat))
-		$stat = array(php_uname());
-		mt_srand(crc32(microtime() . implode('|', $stat)));
-		for ($i = 0; $i < $length; $i ++)
-		{
-			$token .= $salt[mt_rand(0, $len -1)];
-		}
+	        $token = JUserHelper::genRandomPassword(16);
 		return $token;
 	}
 
