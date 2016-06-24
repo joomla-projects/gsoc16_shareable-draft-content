@@ -159,11 +159,11 @@ class ContentControllerArticle extends JControllerForm
 		$return = $model->shareToken($token);
 		if($return)
 		{
-			echo "token saved";
+			JTEXT::_('COM_CONTENT_TOKEN_SAVED');
 		}
 		else
 		{
-			echo "error";
+			JTEXT::_('COM_CONTENT_TOKEN_ERROR');
 		}
 	}
 
