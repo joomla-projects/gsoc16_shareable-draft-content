@@ -158,7 +158,8 @@ class ContentControllerArticle extends JControllerForm
 		$model = $this->getModel();
 		$token = $this->shareTokenGenerate();
 		$return = $model->shareToken($token);
-		if($return)
+		
+		if ($return)
 		{
 			JText::_('COM_CONTENT_TOKEN_SAVED');
 		}
