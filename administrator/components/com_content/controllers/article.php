@@ -146,8 +146,9 @@ class ContentControllerArticle extends JControllerForm
 
 	public function shareTokenGenerate()
 	{
-		jimport( 'joomla.user.helper' );
+		jimport('joomla.user.helper');
 	        $token = JUserHelper::genRandomPassword(16);
+	        
 		return $token;
 	}
 
@@ -159,11 +160,11 @@ class ContentControllerArticle extends JControllerForm
 		$return = $model->shareToken($token);
 		if($return)
 		{
-			JTEXT::_('COM_CONTENT_TOKEN_SAVED');
+			JText::_('COM_CONTENT_TOKEN_SAVED');
 		}
 		else
 		{
-			JTEXT::_('COM_CONTENT_TOKEN_ERROR');
+			JText::_('COM_CONTENT_TOKEN_ERROR');
 		}
 	}
 
