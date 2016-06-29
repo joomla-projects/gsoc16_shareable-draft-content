@@ -43,6 +43,7 @@ class ContentViewArticle extends JViewLegacy
 			$document->setTitle(JText::_('COM_CONTENT_PAGEBREAK_DOC_TITLE'));
 			$this->eName = &$eName;
 			parent::display($tpl);
+            
 			return;
 		}
 
@@ -55,7 +56,8 @@ class ContentViewArticle extends JViewLegacy
 		if (count($errors = $this->get('Errors')))
 		{
 			JError::raiseError(500, implode("\n", $errors));
-			return false;
+			
+            return false;
 		}
 
 		if ($this->getLayout() == 'modal')
@@ -127,7 +129,7 @@ class ContentViewArticle extends JViewLegacy
 			if ($this->state->params->get('save_history', 0) && $canDo->get('core.edit'))
 			{
 				JToolbarHelper::versions('com_content.article', $this->item->id);
-				JToolbarHelper::custom('article.shareDraft', 'share.png', 'share.png','COM_CONTENT_SHARE', false);
+				JToolbarHelper::custom('article.shareDraft', 'share.png', 'share.png', 'COM_CONTENT_SHARE', false);
 			}
 
 			JToolbarHelper::cancel('article.cancel', 'JTOOLBAR_CLOSE');
