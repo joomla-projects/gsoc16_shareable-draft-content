@@ -145,10 +145,12 @@ class ContentControllerArticle extends JControllerForm
 	}
 
 	public function shareDraft()
-	{
+	{       
+		$title = $this->input->getArray(array('jform' => array('title' => 'string')));
+		
 		// Get the model
 		$model = $this->getModel();
-		$return = $model->shareToken();
+		$return = $model->shareToken($title);
 		
 		if ($return)
 		{
