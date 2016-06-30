@@ -705,7 +705,7 @@ class ContentModelArticle extends JModelAdmin
 		$columns = array('articleId', 'title', 'sharetoken');
 
 		// Insert values.
-		$values = array($db->quote($jinput->get("id")), $db->quote($title), $db->quote($token));
+		$values = array($db->quote($jinput->get('id')), $db->quote($title), $db->quote($token));
 
 		// Prepare the insert query.
 		$query
