@@ -680,7 +680,7 @@ class ContentModelArticle extends JModelAdmin
 		return true;
 	}
 	
-	public function shareTokenGenerate()
+	private function shareTokenGenerate()
 	{
 		jimport('joomla.user.helper');
 	        $token = JUserHelper::genRandomPassword(16);
