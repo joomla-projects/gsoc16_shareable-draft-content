@@ -688,15 +688,13 @@ class ContentModelArticle extends JModelAdmin
 		return $token;
 	}
 
-	public function shareToken($token)
+	public function shareToken($title)
 	{
 
 		// perform whatever you want on each item checked in the list
 		$jinput = JFactory::getApplication()->input;
-
-		$jform = $jinput->getArray(array('jform' => array('title' => 'string')));
-		$title = $jform['jform']['title'];
                 $token = $this->shareTokenGenerate();
+		
 		// Get a db connection.
 		$db = $this->getDbo();
 
