@@ -21,7 +21,7 @@ class ContentTableShare extends JTable
 	 *
 	 * @param   JDatabaseDriver  &$db  Database connector object
 	 *
-	 * @since   3.7
+	 * @since   1.6
 	 */
 	public function __construct(&$db)
 	{
