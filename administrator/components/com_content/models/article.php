@@ -679,16 +679,22 @@ class ContentModelArticle extends JModelAdmin
 
 		return true;
 	}
+	
+	private function shareTokenGenerate()
+	{
+		jimport('joomla.user.helper');
+	        $token = JUserHelper::genRandomPassword(16);
+	        
+		return $token;
+	}
 
-	public function shareToken($token)
+	public function shareToken($title)
 	{
 
 		// perform whatever you want on each item checked in the list
 		$jinput = JFactory::getApplication()->input;
-
-		$jform = $jinput->getArray(array('jform' => array('title' => 'string')));
-		$title = $jform['jform']['title'];
-
+                $token = $this->shareTokenGenerate();
+		
 		// Get a db connection.
 		$db = $this->getDbo();
 
@@ -699,7 +705,7 @@ class ContentModelArticle extends JModelAdmin
 		$columns = array('articleId', 'title', 'sharetoken');
 
 		// Insert values.
-		$values = array($db->quote($jinput->get("id")), $db->quote($title), $db->quote($token));
+		$values = array($db->quote($jinput->get('id')), $db->quote($title), $db->quote($token));
 
 		// Prepare the insert query.
 		$query

@@ -144,20 +144,13 @@ class ContentControllerArticle extends JControllerForm
 		return parent::batch($model);
 	}
 
-	public function shareTokenGenerate()
-	{
-		jimport('joomla.user.helper');
-	        $token = JUserHelper::genRandomPassword(16);
-	        
-		return $token;
-	}
-
 	public function shareDraft()
-	{
+	{       
+		$title = $this->input->getArray(array('jform' => array('title' => 'string')));
+		
 		// Get the model
 		$model = $this->getModel();
-		$token = $this->shareTokenGenerate();
-		$return = $model->shareToken($token);
+		$return = $model->shareToken($title);
 		
 		if ($return)
 		{
