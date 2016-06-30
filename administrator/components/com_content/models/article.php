@@ -679,6 +679,14 @@ class ContentModelArticle extends JModelAdmin
 
 		return true;
 	}
+	
+	public function shareTokenGenerate()
+	{
+		jimport('joomla.user.helper');
+	        $token = JUserHelper::genRandomPassword(16);
+	        
+		return $token;
+	}
 
 	public function shareToken($token)
 	{
@@ -688,7 +696,7 @@ class ContentModelArticle extends JModelAdmin
 
 		$jform = $jinput->getArray(array('jform' => array('title' => 'string')));
 		$title = $jform['jform']['title'];
-
+                $token = $this->shareTokenGenerate();
 		// Get a db connection.
 		$db = $this->getDbo();
 
