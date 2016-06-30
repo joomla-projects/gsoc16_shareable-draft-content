@@ -148,7 +148,7 @@ class ContentControllerArticle extends JControllerForm
 	{
 		// Get the model
 		$model = $this->getModel();
-		$return = $model->shareToken($token);
+		$return = $model->shareToken();
 		
 		if ($return)
 		{
