@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  * Share Table class.
  *
- * @since  1.6
+ * @since  3.7
  */
 class ContentTableShare extends JTable
 {
