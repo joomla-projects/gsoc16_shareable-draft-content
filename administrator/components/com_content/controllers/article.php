@@ -143,6 +143,16 @@ class ContentControllerArticle extends JControllerForm
 
 		return parent::batch($model);
 	}
+	
+	/**
+	 * Method to generate and store share token.
+	 *
+	 * @param   object  $model  The model.
+	 *
+	 * @return  boolean   True if token successfully stored, false otherwise and internal error is set.
+	 *
+	 * @since   3.7
+	 */
 
 	public function shareDraft()
 	{       
