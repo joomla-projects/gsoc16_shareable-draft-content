@@ -493,6 +493,31 @@ class ContentModelArticle extends JModelAdmin
 			$data['images'] = (string) $registry;
 		}
 
+		JLoader::register('CategoriesHelper', JPATH_ADMINISTRATOR . '/components/com_categories/helpers/categories.php');
+
+		// Cast catid to integer for comparison
+		$catid = (int) $data['catid'];
+
+		// Check if New Category exists
+		if ($catid > 0)
+		{
+			$catid = CategoriesHelper::validateCategoryId($data['catid'], 'com_content');
+		}
+
+		// Save New Category
+		if ($catid == 0)
+		{
+			$table = array();
+			$table['title'] = $data['catid'];
+			$table['parent_id'] = 1;
+			$table['extension'] = 'com_content';
+			$table['language'] = $data['language'];
+			$table['published'] = 1;
+
+			// Create new category and get catid back
+			$data['catid'] = CategoriesHelper::createCategory($table);
+		}
+
 		if (isset($data['urls']) && is_array($data['urls']))
 		{
 			$check = $input->post->get('jform', array(), 'array');
@@ -576,7 +601,6 @@ class ContentModelArticle extends JModelAdmin
 
 		if (parent::save($data))
 		{
-
 			if (isset($data['featured']))
 			{
 				$this->featured($this->getState($this->getName() . '.id'), $data['featured']);
@@ -599,7 +623,7 @@ class ContentModelArticle extends JModelAdmin
 	public function featured($pks, $value = 0)
 	{
 		// Sanitize the ids.
-		$pks = (array)$pks;
+		$pks = (array) $pks;
 		JArrayHelper::toInteger($pks);
 
 		if (empty($pks))
@@ -615,22 +639,24 @@ class ContentModelArticle extends JModelAdmin
 		{
 			$db = $this->getDbo();
 			$query = $db->getQuery(true)
-				->update($db->quoteName('#__content'))
-				->set('featured = ' . (int)$value)
-				->where('id IN (' . implode(',', $pks) . ')');
+						->update($db->quoteName('#__content'))
+						->set('featured = ' . (int) $value)
+						->where('id IN (' . implode(',', $pks) . ')');
 			$db->setQuery($query);
 			$db->execute();
 
-			if ((int)$value == 0)
+			if ((int) $value == 0)
 			{
 				// Adjust the mapping table.
 				// Clear the existing features settings.
 				$query = $db->getQuery(true)
-					->delete($db->quoteName('#__content_frontpage'))
-					->where('content_id IN (' . implode(',', $pks) . ')');
+							->delete($db->quoteName('#__content_frontpage'))
+							->where('content_id IN (' . implode(',', $pks) . ')');
 				$db->setQuery($query);
 				$db->execute();
-			} else {
+			}
+			else
+			{
 				// First, we find out which of our new featured articles are already featured.
 				$query = $db->getQuery(true)
 					->select('f.content_id')
@@ -677,7 +703,7 @@ class ContentModelArticle extends JModelAdmin
 
 		return true;
 	}
-
+	
 	/**
 	 * Method to store the token generated.
 	 *
@@ -731,7 +757,6 @@ class ContentModelArticle extends JModelAdmin
 			Jtext::_('COM_CONTENT_TOKEN_ERROR');
 		}
 	}
-
 
 	/**
 	 * A protected method to get a set of ordering conditions.
@@ -831,7 +856,7 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @return  void
 	 *
-	 * @since   3.5.2
+	 * @since   3.6.0
 	 */
 	public function hit()
 	{
