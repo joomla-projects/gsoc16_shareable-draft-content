@@ -701,7 +701,7 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @return  boolean  True on success.
 	 *
-	 * @since 3.7
+	 * @since   3.7
 	 */
 	public function shareToken($title)
 	{
