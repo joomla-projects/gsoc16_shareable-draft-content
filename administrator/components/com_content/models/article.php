@@ -576,7 +576,6 @@ class ContentModelArticle extends JModelAdmin
 
 		if (parent::save($data))
 		{
-
 			if (isset($data['featured']))
 			{
 				$this->featured($this->getState($this->getName() . '.id'), $data['featured']);
@@ -599,7 +598,7 @@ class ContentModelArticle extends JModelAdmin
 	public function featured($pks, $value = 0)
 	{
 		// Sanitize the ids.
-		$pks = (array)$pks;
+		$pks = (array) $pks;
 		JArrayHelper::toInteger($pks);
 
 		if (empty($pks))
@@ -615,22 +614,24 @@ class ContentModelArticle extends JModelAdmin
 		{
 			$db = $this->getDbo();
 			$query = $db->getQuery(true)
-				->update($db->quoteName('#__content'))
-				->set('featured = ' . (int)$value)
-				->where('id IN (' . implode(',', $pks) . ')');
+						->update($db->quoteName('#__content'))
+						->set('featured = ' . (int) $value)
+						->where('id IN (' . implode(',', $pks) . ')');
 			$db->setQuery($query);
 			$db->execute();
 
-			if ((int)$value == 0)
+			if ((int) $value == 0)
 			{
 				// Adjust the mapping table.
 				// Clear the existing features settings.
 				$query = $db->getQuery(true)
-					->delete($db->quoteName('#__content_frontpage'))
-					->where('content_id IN (' . implode(',', $pks) . ')');
+							->delete($db->quoteName('#__content_frontpage'))
+							->where('content_id IN (' . implode(',', $pks) . ')');
 				$db->setQuery($query);
 				$db->execute();
-			} else {
+			}
+			else
+			{
 				// First, we find out which of our new featured articles are already featured.
 				$query = $db->getQuery(true)
 					->select('f.content_id')
@@ -700,7 +701,7 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @return  boolean  True on success.
 	 *
-	 * @since 3.7
+	 * @since   3.7
 	 */
 	public function shareToken($title)
 	{
@@ -712,14 +713,7 @@ class ContentModelArticle extends JModelAdmin
 			$db = $this->getDbo();
 			$query = $db->getQuery(true);
 
-			$data = array('articleId', 'title', 'sharetoken');
-			$values = array($db->quote($this->get('id')), $db->quote($title), $db->quote($token));
-
-			$query
-				->insert($db->quoteName('#__share_draft'))
-				->columns($db->quoteName($data))
-				->values(implode(',', $values));
-
+			$data = array('articleId' => $this->get('id'), 'title' => $title, 'sharetoken' => $token);
 
 			$db->setQuery($query);
 			$table->save($data);
@@ -728,10 +722,9 @@ class ContentModelArticle extends JModelAdmin
 		}
 		catch (Exception $e)
 		{
-			Jtext::_('COM_CONTENT_TOKEN_ERROR');
+			throw new RuntimeException($e->getMessage());
 		}
 	}
-
 
 	/**
 	 * A protected method to get a set of ordering conditions.
@@ -831,7 +824,7 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @return  void
 	 *
-	 * @since   3.5.2
+	 * @since   3.6.0
 	 */
 	public function hit()
 	{
