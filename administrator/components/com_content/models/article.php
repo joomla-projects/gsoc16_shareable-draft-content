@@ -722,7 +722,7 @@ class ContentModelArticle extends JModelAdmin
 		}
 		catch (Exception $e)
 		{
-			Jtext::_('COM_CONTENT_TOKEN_ERROR');
+			throw new RuntimeException($e->getMessage());
 		}
 	}
 
