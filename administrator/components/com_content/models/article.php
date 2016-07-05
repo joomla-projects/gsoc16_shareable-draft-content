@@ -713,15 +713,8 @@ class ContentModelArticle extends JModelAdmin
 			$db = $this->getDbo();
 			$query = $db->getQuery(true);
 
-			$data = array('articleId', 'title', 'sharetoken');
-			$values = array($db->quote($this->get('id')), $db->quote($title), $db->quote($token));
-
-			$query
-				->insert($db->quoteName('#__share_draft'))
-				->columns($db->quoteName($data))
-				->values(implode(',', $values));
-
-
+			$data = array('articleId'=>$this->get('id'), 'title'=>$title, 'sharetoken'=>$token);
+			
 			$db->setQuery($query);
 			$table->save($data);
 
