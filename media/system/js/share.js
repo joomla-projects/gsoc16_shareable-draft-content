@@ -1,7 +1,7 @@
 jQuery(document).ready(function(e){e("#sharebutton").click(function()
 {
     var a={
-            articleId  : $().val(),
+            articleId  : $('jform_id').val(),
             title: $('jform_title').val(),
             sharetoken  : $().val(),
     Joomla.removeMessages(),

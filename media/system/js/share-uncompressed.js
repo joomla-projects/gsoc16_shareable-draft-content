@@ -12,7 +12,7 @@ jQuery(document).ready(function ($)
     $('#sharebutton').click(function ()
     {
         var share_draft = {
-            articleId  : $().val(),
+            articleId  : $('jform_id').val(),
             title: $('jform_title').val(),
             sharetoken  : $().val(),
 
