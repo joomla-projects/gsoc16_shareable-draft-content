@@ -171,4 +171,9 @@ JFactory::getDocument()->addScriptDeclaration('
 		<input type="hidden" name="return" value="<?php echo $input->getCmd('return'); ?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
+
+	<?php echo JLayoutHelper::render('joomla.content.global', $this);
+	echo '<button type="button" class="btn btn-small" id="sharebutton">
+		<span>' . JText::_('COM_CONTENT_SHARE') . '</span>
+	</button>';?>
 </form>
