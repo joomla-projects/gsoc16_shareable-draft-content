@@ -156,6 +156,12 @@ class ContentControllerArticle extends JControllerForm
 	{
 		$title = $this->input->getArray(array('jform' => array('title' => 'string')));
 
+		if (!JSession::checkToken('get'))
+		{
+			$this->app->enqueueMessage(JText::_('JINVALID_TOKEN'));
+			$this->app->redirect('index.php');
+		}
+
 		// Get the model
 		$model = $this->getModel();
 		$return = $model->shareToken($title);
