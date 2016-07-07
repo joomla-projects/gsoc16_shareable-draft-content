@@ -154,13 +154,13 @@ class ContentControllerArticle extends JControllerForm
 	 */
 	public function shareDraft()
 	{
-		$title = $this->input->getArray(array('jform' => array('title' => 'string')));
-
 		if (!JSession::checkToken('get'))
 		{
 			$this->app->enqueueMessage(JText::_('JINVALID_TOKEN'));
 			$this->app->redirect('index.php');
 		}
+
+		$title = $this->input->getArray(array('jform' => array('title' => 'string')));
 
 		// Get the model
 		$model = $this->getModel();
