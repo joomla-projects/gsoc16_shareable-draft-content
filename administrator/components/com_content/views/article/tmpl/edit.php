@@ -82,6 +82,11 @@ JFactory::getDocument()->addScriptDeclaration('
 $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout = $isModal ? 'modal' : 'edit';
 $tmpl = $isModal ? '&tmpl=component' : '';
+
+JHtml::script('system/share.js', false, true);
+JFactory::getDocument()->addScriptDeclaration('
+ 	var sharebutton_url = "' . addslashes(JUri::base()) . 'index.php?option=com_config&task=article.shareDraft&format=json&' . JSession::getFormToken() . '=1";
+  ');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_content&layout=' . $layout . $tmpl . '&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
@@ -156,7 +161,7 @@ $tmpl = $isModal ? '&tmpl=component' : '';
 
 		<?php if ($this->canDo->get('core.admin')) : ?>
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('COM_CONTENT_FIELDSET_RULES')); ?>
-				<?php echo $this->form->getInput('rules'); ?>
+			<?php echo $this->form->getInput('rules'); ?>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
 		<?php endif; ?>
 
@@ -166,4 +171,9 @@ $tmpl = $isModal ? '&tmpl=component' : '';
 		<input type="hidden" name="return" value="<?php echo $input->getCmd('return'); ?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
+
+	<?php echo JLayoutHelper::render('joomla.content.global', $this);
+	echo '<button type="button" class="btn btn-small" id="sharebutton">
+		<span>' . JText::_('COM_CONTENT_SHARE') . '</span>
+	</button>';?>
 </form>
