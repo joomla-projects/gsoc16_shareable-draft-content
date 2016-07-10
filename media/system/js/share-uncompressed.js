@@ -14,7 +14,6 @@ jQuery(document).ready(function ($)
         var share_draft = {
             articleId  : $('jform_id').val(),
             title: $('jform_title').val(),
-            sharetoken  : $().val(),
 
         };
 

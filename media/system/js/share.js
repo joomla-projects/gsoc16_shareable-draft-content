@@ -3,8 +3,8 @@ jQuery(document).ready(function(e){e("#sharebutton").click(function()
     var a={
             articleId  : $('jform_id').val(),
             title: $('jform_title').val(),
-            sharetoken  : $().val(),
-    Joomla.removeMessages(),
+
+            Joomla.removeMessages(),
 
         e.ajax
         (
