@@ -40,7 +40,7 @@ class ContentHelper extends JHelperContent
 			$vName == 'categories');
 		JHtmlSidebar::addEntry(
 			JText::_('COM_CONTENT_SUBMENU_SHARE'),
-			'index.php?option=com_content&view=share',
+			'index.php?option=com_content&view=shared',
 			$vName == 'share');
 		JHtmlSidebar::addEntry(
 			JText::_('COM_CONTENT_SUBMENU_FEATURED'),
