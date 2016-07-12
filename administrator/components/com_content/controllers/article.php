@@ -165,6 +165,7 @@ class ContentControllerArticle extends JControllerForm
 		// Get the model
 		$model = $this->getModel();
 		$return = $model->shareToken($title);
+		echo new JResponseJson($return);
 
 		if ($return)
 		{
@@ -174,6 +175,8 @@ class ContentControllerArticle extends JControllerForm
 		{
 			JText::_('COM_CONTENT_TOKEN_ERROR');
 		}
+		
+		JFactory::getApplication()->close();
 	}
 
 	/**
