@@ -166,16 +166,6 @@ class ContentControllerArticle extends JControllerForm
 		$model = $this->getModel();
 		$return = $model->shareToken($title);
 		echo new JResponseJson($return);
-
-		if ($return)
-		{
-			JText::_('COM_CONTENT_TOKEN_SAVED');
-		}
-		else
-		{
-			JText::_('COM_CONTENT_TOKEN_ERROR');
-		}
-		
 		JFactory::getApplication()->close();
 	}
 

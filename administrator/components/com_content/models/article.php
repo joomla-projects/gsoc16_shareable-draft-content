@@ -724,7 +724,7 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @param   string  $title  The title of the shared article.
 	 *
-	 * @return  boolean  True on success.
+	 * @return  token.
 	 *
 	 * @since   3.7
 	 */
@@ -733,22 +733,11 @@ class ContentModelArticle extends JModelAdmin
 		$table = $this->getTable('share', 'ContentTable');
 		$token = $this->shareTokenGenerate();
 
-		try
-		{
-			$db = $this->getDbo();
-			$query = $db->getQuery(true);
+		$data = array('articleId' => $this->get('id'), 'title' => $title, 'sharetoken' => $token);
 
-			$data = array('articleId' => $this->get('id'), 'title' => $title, 'sharetoken' => $token);
+		$table->save($data);
 
-			$db->setQuery($query);
-			$table->save($data);
-
-			return $db->execute();
-		}
-		catch (Exception $e)
-		{
-			throw new RuntimeException($e->getMessage());
-		}
+		return $token;
 	}
 
 	/**
