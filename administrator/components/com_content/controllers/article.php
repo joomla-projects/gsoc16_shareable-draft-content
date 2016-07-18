@@ -156,10 +156,14 @@ class ContentControllerArticle extends JControllerForm
 	{
 		if (!JSession::checkToken('get'))
 		{
-			$this->app->enqueueMessage(JText::_('JINVALID_TOKEN'));
-			$this->app->redirect('index.php');
+			$app    = JFactory::getApplication();
+			$app->enqueueMessage(JText::_('JINVALID_TOKEN'));
+			echo new JResponseJson;
+			$app->close();
 		}
-
+		
+		try{
+			
 		$title = $this->input->getArray(array('jform' => array('title' => 'string')));
 
 		// Get the model
@@ -167,6 +171,10 @@ class ContentControllerArticle extends JControllerForm
 		$return = $model->shareToken($title);
 		echo new JResponseJson($return);
 		JFactory::getApplication()->close();
+		
+		}catch(Exception e){
+		echo $e->getMessage();
+		}
 	}
 
 	/**
