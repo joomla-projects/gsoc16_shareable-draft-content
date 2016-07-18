@@ -172,7 +172,7 @@ class ContentControllerArticle extends JControllerForm
 		echo new JResponseJson($return);
 		JFactory::getApplication()->close();
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 		echo $e->getMessage();
 		}
