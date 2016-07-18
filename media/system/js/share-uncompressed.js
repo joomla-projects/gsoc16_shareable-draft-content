@@ -33,6 +33,12 @@ $(document).ready(function ($){
 
                     window.scrollTo(0, 0);
                 }
+            .fail(function(xhr, ajaxOptions, thrownError) {
+    
+                    Joomla.renderMessages(xhr.responseText);
+                    
+                    window.scrollTo(0, 0);
+        });
 
     });
 });
