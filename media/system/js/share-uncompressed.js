@@ -7,8 +7,6 @@
 /**
  * Calls the sending process of the config class
  */
-$document = JFactory::getDocument();
-$document->addScriptDeclaration('
 (function($){
 $(document).ready(function ($){
     $('#sharebutton').click(function ()
@@ -38,6 +36,5 @@ $(document).ready(function ($){
 
     });
 });
-}(jquery));
-');
+}(jQuery);
 
