@@ -7,8 +7,10 @@
 /**
  * Calls the sending process of the config class
  */
-jQuery(document).ready(function ($)
-{
+$document = JFactory::getDocument();
+$document->addScriptDeclaration('
+(function($){
+$(document).ready(function ($){
     $('#sharebutton').click(function ()
     {
         var share_draft = {
@@ -36,4 +38,6 @@ jQuery(document).ready(function ($)
 
     });
 });
+}(jquery));
+');
 
