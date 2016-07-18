@@ -154,13 +154,17 @@ class ContentControllerArticle extends JControllerForm
 	 */
 	public function shareDraft()
 	{
+		$app    = JFactory::getApplication();
+		
 		if (!JSession::checkToken('get'))
 		{
-			$app    = JFactory::getApplication();
 			$app->enqueueMessage(JText::_('JINVALID_TOKEN'));
 			echo new JResponseJson;
 			$app->close();
 		}
+		
+		$error = false;
+		$message = JText::_('TOKEN_SAVED');
 		
 		try
 		{
@@ -169,13 +173,17 @@ class ContentControllerArticle extends JControllerForm
 		// Get the model
 		$model = $this->getModel();
 		$return = $model->shareToken($title);
-		echo new JResponseJson($return);
 		JFactory::getApplication()->close();
 		}
 		catch (Exception $e)
 		{
+		$error = true;
+		$message = JText::_('TOKEN_NOT_SAVED');
 		echo new JResponseJson($e);
 		}
+		
+		echo new JResponseJson($return,$message,$error);
+		$app->close();
 	}
 
 	/**
