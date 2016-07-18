@@ -162,8 +162,8 @@ class ContentControllerArticle extends JControllerForm
 			$app->close();
 		}
 		
-		try{
-			
+		try
+		{
 		$title = $this->input->getArray(array('jform' => array('title' => 'string')));
 
 		// Get the model
@@ -171,8 +171,9 @@ class ContentControllerArticle extends JControllerForm
 		$return = $model->shareToken($title);
 		echo new JResponseJson($return);
 		JFactory::getApplication()->close();
-		
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 		echo $e->getMessage();
 		}
 	}
