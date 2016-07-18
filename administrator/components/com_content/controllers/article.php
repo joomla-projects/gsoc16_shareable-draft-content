@@ -164,7 +164,7 @@ class ContentControllerArticle extends JControllerForm
 		}
 		
 		$error = false;
-		$message = JText::_('TOKEN_SAVED');
+		$message = JText::_('COM_CONTENT_TOKEN_SAVED');
 		
 		try
 		{
@@ -178,7 +178,7 @@ class ContentControllerArticle extends JControllerForm
 		catch (Exception $e)
 		{
 		$error = true;
-		$message = JText::_('TOKEN_NOT_SAVED');
+		$message = JText::_('COM_CONTENT_TOKEN_ERROR');
 		echo new JResponseJson($e);
 		}
 		
