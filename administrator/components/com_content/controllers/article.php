@@ -182,7 +182,7 @@ class ContentControllerArticle extends JControllerForm
 		echo new JResponseJson($e);
 		}
 		
-		echo new JResponseJson($return,$message,$error);
+		echo new JResponseJson($return, $message, $error);
 		$app->close();
 	}
 
