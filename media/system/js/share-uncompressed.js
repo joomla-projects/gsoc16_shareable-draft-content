@@ -12,8 +12,8 @@ $(document).ready(function ($){
     $('#sharebutton').click(function ()
     {
         var share_draft = {
-            articleId  : $('#jform_id').val(),
-            title: $('#jform_title').val(),
+            articleId : $('#jform_id').val(),
+            title     : $('#jform_title').val(),
 
         };
 
