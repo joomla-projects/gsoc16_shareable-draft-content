@@ -163,6 +163,7 @@ class ContentControllerArticle extends JControllerForm
 			$app->close();
 		}
 		
+		$return = false;
 		$error = false;
 		$message = JText::_('COM_CONTENT_TOKEN_SAVED');
 		
@@ -173,13 +174,11 @@ class ContentControllerArticle extends JControllerForm
 		// Get the model
 		$model = $this->getModel();
 		$return = $model->shareToken($title);
-		JFactory::getApplication()->close();
 		}
 		catch (Exception $e)
 		{
 		$error = true;
 		$message = JText::_('COM_CONTENT_TOKEN_ERROR');
-		echo new JResponseJson($e);
 		}
 		
 		echo new JResponseJson($return, $message, $error);
