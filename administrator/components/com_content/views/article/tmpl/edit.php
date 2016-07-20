@@ -85,7 +85,7 @@ $tmpl = $isModal ? '&tmpl=component' : '';
 
 JHtml::script('system/share.js', false, true);
 JFactory::getDocument()->addScriptDeclaration('
- 	var sharebutton_url = "' . addslashes(JUri::base()) . 'index.php?option=com_config&task=article.shareDraft&format=json&' . JSession::getFormToken() . '=1";
+ 	var sharebutton_url = "' . addslashes(JUri::base()) . 'index.php?option=com_content&task=article.shareDraft&format=json&' . JSession::getFormToken() . '=1";
   ');
 ?>
 
