@@ -169,16 +169,16 @@ class ContentControllerArticle extends JControllerForm
 		
 		try
 		{
-		$title = $this->input->getArray(array('jform' => array('title' => 'string')));
+			$title = $this->input->getArray(array('jform' => array('title' => 'string')));
 
-		// Get the model
-		$model = $this->getModel();
-		$return = $model->shareToken($title);
+			// Get the model
+			$model = $this->getModel();
+			$return = $model->shareToken($title);
 		}
 		catch (Exception $e)
 		{
-		$error = true;
-		$message = JText::_('COM_CONTENT_TOKEN_ERROR');
+			$error = true;
+			$message = JText::_('COM_CONTENT_TOKEN_ERROR');
 		}
 		
 		echo new JResponseJson($return, $message, $error);
