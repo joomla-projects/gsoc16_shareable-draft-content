@@ -156,7 +156,7 @@ class ContentControllerArticle extends JControllerForm
 	{
 		$app    = JFactory::getApplication();
 		
-		if (!JSession::checkToken('get'))
+		if (!JSession::checkToken())
 		{
 			$app->enqueueMessage(JText::_('JINVALID_TOKEN'));
 			echo new JResponseJson;
