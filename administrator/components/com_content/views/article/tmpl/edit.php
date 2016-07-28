@@ -122,7 +122,9 @@ JFactory::getDocument()->addScriptDeclaration('
 			</div>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
 		<?php endif; ?>
-
+		<div>
+			
+		</div>
 		<?php // Do not show the images and links options if the edit form is configured not to. ?>
 		<?php if ($params->show_urls_images_backend == 1) : ?>
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'images', JText::_('COM_CONTENT_FIELDSET_URLS_AND_IMAGES')); ?>
