@@ -730,15 +730,43 @@ class ContentModelArticle extends JModelAdmin
 	 */
 	public function shareToken($title)
 	{
-		$table = $this->getTable('share', 'ContentTable');
-		$token = $this->shareTokenGenerate();
+		$table = $this->getTable('Share', 'ContentTable');
+        	$db = $this->getDbo();
+        	$query = $db->getQuery(true);
 
-		$data = array('articleId' => $this->get('id'), 'title' => $title, 'sharetoken' => $token);
+        	$query
+             		->select('*')
+             		->from($db->quoteName('#__share_draft'))
+             		->where($db->quoteName('articleId') . ' = '. $db->quote($this->get('id')));
 
-		$table->save($data);
+       		$db->execute();
+       		$num_rows = $db->getNumRows();
 
-		return $token;
-	}
+       		if($num_rows !== null)
+       		{
+
+            		$db = $this->getDbo();
+            		$query = $db->getQuery(true);
+
+            		$query
+             			->select('sharetoken')
+             			->from($db->quoteName('#__share_draft'))
+             			->where($db->quoteName('id') . ' = '. $db->quote($this->get('id')));
+
+           		$db->execute();
+           		$valueshow = $db->loadObject();
+           		echo "not a new value, the existing value is:".$valueshow;
+       		}
+       		else
+      		{ 
+           		
+           		$token = $this->shareTokenGenerate();
+           		$data = array('articleId' => $this->get('id'), 'title' => $title, 'sharetoken' => $token);
+           		$table->save($data);
+           		return $token;
+      		}   
+    	}
+	
 
 	/**
 	 * A protected method to get a set of ordering conditions.
