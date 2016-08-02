@@ -737,15 +737,14 @@ class ContentModelArticle extends JModelAdmin
         	$query
              		->select('*')
              		->from($db->quoteName('#__share_draft'))
-             		->where($db->quoteName('articleId') . ' = '. $db->quote($this->get('id')));
+             		->where($db->quoteName('articleId') . '='. $db->quote($this->get('id')));
 
        		$db->execute();
        		$num_rows = $db->getNumRows();
 
        		if($num_rows !== null)
        		{
-
-            		$db = $this->getDbo();
+			$db = $this->getDbo();
             		$query = $db->getQuery(true);
 
             		$query
@@ -759,13 +758,12 @@ class ContentModelArticle extends JModelAdmin
        		}
        		else
       		{ 
-           		
            		$token = $this->shareTokenGenerate();
            		$data = array('articleId' => $this->get('id'), 'title' => $title, 'sharetoken' => $token);
            		$table->save($data);
            		return $token;
       		}   
-    	}
+        }
 	
 
 	/**
