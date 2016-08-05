@@ -742,7 +742,7 @@ class ContentModelArticle extends JModelAdmin
        		$db->execute();
        		$num_rows = $db->getNumRows();
 
-       		if($num_rows !== null)
+       		if ($num_rows !== null)
        		{
 			$db = $this->getDbo();
             		$query = $db->getQuery(true);
@@ -750,11 +750,11 @@ class ContentModelArticle extends JModelAdmin
             		$query
              			->select('sharetoken')
              			->from($db->quoteName('#__share_draft'))
-             			->where($db->quoteName('id') . ' = '. $db->quote($this->get('id')));
+             			->where($db->quoteName('id') . ' = ' . $db->quote($this->get('id')));
 
            		$db->execute();
            		$valueshow = $db->loadObject();
-           		echo "not a new value, the existing value is:".$valueshow;
+           		echo "not a new value, the existing value is:" . $valueshow;
        		}
        		else
       		{ 
@@ -762,8 +762,10 @@ class ContentModelArticle extends JModelAdmin
            		$data = array('articleId' => $this->get('id'), 'title' => $title, 'sharetoken' => $token);
            		$table->save($data);
            		return $token;
+      			
       		}   
-        }
+		
+	}
 	
 
 	/**
