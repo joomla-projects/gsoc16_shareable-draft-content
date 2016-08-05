@@ -763,7 +763,7 @@ class ContentModelArticle extends JModelAdmin
            		$table->save($data);
            		return $token;
       			
-      		}   
+      		 }   
 		
 	}
 	
