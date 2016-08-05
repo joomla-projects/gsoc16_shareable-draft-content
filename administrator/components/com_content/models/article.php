@@ -737,7 +737,7 @@ class ContentModelArticle extends JModelAdmin
         	$query
              		->select('*')
              		->from($db->quoteName('#__share_draft'))
-             		->where($db->quoteName('articleId') . '='. $db->quote($this->get('id')));
+             		->where($db->quoteName('articleId') . '=' . $db->quote($this->get('id')));
 
        		$db->execute();
        		$num_rows = $db->getNumRows();
