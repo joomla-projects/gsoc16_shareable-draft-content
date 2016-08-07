@@ -158,8 +158,7 @@ class ContentControllerArticle extends JControllerForm
 		
 		if (!JSession::checkToken())
 		{
-			$app->enqueueMessage(JText::_('JINVALID_TOKEN'));
-			echo new JResponseJson;
+			echo new JResponseJson(JText::_('JINVALID_TOKEN'));
 			$app->close();
 		}
 		
