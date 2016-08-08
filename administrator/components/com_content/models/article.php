@@ -761,6 +761,7 @@ class ContentModelArticle extends JModelAdmin
            		$token = $this->shareTokenGenerate();
            		$data = array('articleId' => $this->get('id'), 'title' => $title, 'sharetoken' => $token);
            		$table->save($data);
+           		
            		return $token;
       			
       		 }   
