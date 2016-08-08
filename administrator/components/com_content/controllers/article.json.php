@@ -1,1 +1,4 @@
-//This is a json.php file
+<?php
+//This is the article.json.php
+
+?>
