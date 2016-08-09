@@ -722,8 +722,6 @@ class ContentModelArticle extends JModelAdmin
 	/**
 	 * Method to store the token generated.
 	 *
-	 * @param   string  $title  The title of the shared article.
-	 *
 	 * @return  token.
 	 *
 	 * @since   3.7
