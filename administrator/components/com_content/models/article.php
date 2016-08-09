@@ -728,7 +728,7 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @since   3.7
 	 */
-	public function shareToken($title)
+	public function shareToken()
 	{
 		$table = $this->getTable('Share', 'ContentTable');
         	$db = $this->getDbo();
@@ -753,13 +753,14 @@ class ContentModelArticle extends JModelAdmin
              			->where($db->quoteName('id') . ' = ' . $db->quote($this->get('id')));
 
            		$db->execute();
-           		$valueshow = $db->loadObject();
-           		echo "not a new value, the existing value is:" . $valueshow;
+           		$existingtoken = $db->loadObject();
+           		return $existingtoken;
        		}
        		else
       		{ 
            		$token = $this->shareTokenGenerate();
-           		$data = array('articleId' => $this->get('id'), 'title' => $title, 'sharetoken' => $token);
+           		$date = JFactory::getDate();
+           		$data = array('articleId' => $this->get('id'), 'sharetoken' => $token, 'created' =>$date);
            		$table->save($data);
            		
            		return $token;
