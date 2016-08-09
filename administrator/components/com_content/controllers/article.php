@@ -168,11 +168,9 @@ class ContentControllerArticle extends JControllerForm
 		
 		try
 		{
-			$title = $this->input->getArray(array('jform' => array('title' => 'string')));
-
 			// Get the model
 			$model = $this->getModel();
-			$return = $model->shareToken($title);
+			$return = $model->shareToken();
 		}
 		catch (Exception $e)
 		{
