@@ -53,4 +53,4 @@
 		          echo new JResponseJson($return, $message, $error);
 		          $app->close();
 	     }
-}
+ }
