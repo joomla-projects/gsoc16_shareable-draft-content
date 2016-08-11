@@ -6,3 +6,41 @@
  * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
+ class ContentControllerArticle extends JControllerForm
+{
+	    /**
+	     * Method to generate and store share token.
+	     *
+	     * @return  boolean   True if token successfully stored, false otherwise and internal error is set.
+	     *
+	     * @since   3.7
+	     */
+	     public function shareDraft()
+	     {
+		          $app    = JFactory::getApplication();
+		
+	    	      if (!JSession::checkToken())
+	    	      {
+	      		        echo new JResponseJson(JText::_('JINVALID_TOKEN'));
+	      		        $app->close();
+		          }
+		
+	    	      $return = false;
+	    	      $error = false;
+	    	      $message = JText::_('COM_CONTENT_TOKEN_SAVED');
+		
+	    	      try
+		          {
+			               // Get the model
+			              $model = $this->getModel();
+			              $return = $model->shareToken();
+		          }
+		          catch (Exception $e)
+		          {
+			              $error = true;
+			              $message = JText::_('COM_CONTENT_TOKEN_ERROR');
+		          }
+		
+		          echo new JResponseJson($return, $message, $error);
+		          $app->close();
+	}
