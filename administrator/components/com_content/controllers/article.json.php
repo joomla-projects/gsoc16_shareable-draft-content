@@ -30,7 +30,7 @@
 		
 	    	      if (!JSession::checkToken())
 	    	      {
-	      		        echo new JResponseJson(null,JText::_('JINVALID_TOKEN'),false);
+	      		        echo new JResponseJson(null, JText::_('JINVALID_TOKEN'), false);
 	      		        $app->close();
 		          }
 		
