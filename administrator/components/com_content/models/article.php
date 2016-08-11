@@ -742,7 +742,6 @@ class ContentModelArticle extends JModelAdmin
 
        		if ($num_rows !== null)
        		{
-			$db = $this->getDbo();
             		$query = $db->getQuery(true);
 
             		$query
