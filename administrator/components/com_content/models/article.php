@@ -750,8 +750,9 @@ class ContentModelArticle extends JModelAdmin
              			->where($db->quoteName('id') . ' = ' . $db->quote($this->get('id')));
 
            		$db->execute();
-           		$existingtoken = $db->loadObject();
-           		return $existingtoken;
+           		$token = $db->loadObject();
+           	
+       			
        		}
        		else
       		{ 
@@ -759,10 +760,10 @@ class ContentModelArticle extends JModelAdmin
            		$date = JFactory::getDate();
            		$data = array('articleId' => $this->get('id'), 'sharetoken' => $token, 'created' =>$date);
            		$table->save($data);
-           		
-           		return $token;
       			
-      		 }   
+      		 }
+      		 
+      		 return $token;
 		
 	}
 	
