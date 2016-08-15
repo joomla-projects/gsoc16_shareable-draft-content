@@ -75,18 +75,6 @@ JFactory::getDocument()->addScriptDeclaration('
 			{
 				window.parent.jQuery("#articleEdit' . (int) $this->item->id . 'Modal").modal("hide");
 			}
-		
-                        if (task == "article.shareDraft")
-                        {
-                        	shareAction();
-                        	
-                        	return false;
-                        }
-                        else 
-                        {
-                        	Joomla.submitform(task);
-                        	
-                        }
 		}
 	};
 ');
@@ -96,7 +84,7 @@ $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout = $isModal ? 'modal' : 'edit';
 $tmpl = $isModal ? '&tmpl=component' : '';
 
-JHtml::script('system/share.js', false, true);
+JHtml::script('system/share-uncompressed.js', false, true);
 JFactory::getDocument()->addScriptDeclaration('
  	var sharebutton_url = "' . addslashes(JUri::base()) . 'index.php?option=com_content&task=article.shareDraft&format=json&' . JSession::getFormToken() . '=1";
   ');
