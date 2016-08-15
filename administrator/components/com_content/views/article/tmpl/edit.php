@@ -64,6 +64,7 @@ if (isset($this->item->attribs['show_urls_images_backend']) && $this->item->attr
 JFactory::getDocument()->addScriptDeclaration('
 	Joomla.submitbutton = function(task)
 	{
+		
 		if (task == "article.cancel" || document.formvalidator.isValid(document.getElementById("item-form")))
 		{
 			jQuery("#permissions-sliders select").attr("disabled", "disabled");
@@ -74,6 +75,18 @@ JFactory::getDocument()->addScriptDeclaration('
 			{
 				window.parent.jQuery("#articleEdit' . (int) $this->item->id . 'Modal").modal("hide");
 			}
+		
+                        if (task == "article.shareDraft")
+                        {
+                        	shareAction();
+                        	
+                        	return false;
+                        }
+                        else 
+                        {
+                        	Joomla.submitform(task);
+                        	
+                        }
 		}
 	};
 ');
