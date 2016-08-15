@@ -22,11 +22,13 @@
                 return false;
 				
 				$.ajax({
+					type:"POST",
 					url: 'index.php?option=com_content&task=article.shareDraft&format=json',
 					data: share_draft,
 					dataType: "json"
 				})
 				.done(function (response) {
+					alert("Success");
 					// Render messages, if any.
 					if (typeof response.messages == 'object' && response.messages !== null) {
 						Joomla.renderMessages(response.messages);
@@ -34,6 +36,7 @@
 					}
 				})
 				.fail(function (xhr, ajaxOptions, thrownError) {
+					alert("fail"),
 					Joomla.renderMessages(xhr.responseText);
 					window.scrollTo(0, 0);
 				});
