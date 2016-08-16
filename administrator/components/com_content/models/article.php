@@ -747,7 +747,7 @@ class ContentModelArticle extends JModelAdmin
            		$data = array('articleId' => $this->get('id'), 'sharetoken' => $token, 'created' =>$date);
            		$table->save($data);
       			
-      		}
+      		 }
       		 
       		return $token;
 		
