@@ -711,7 +711,7 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @since 3.7
 	 */
-	private function shareTokenGenerate()
+	public function shareTokenGenerate()
 	{
 		jimport('joomla.user.helper');
 		$token = JUserHelper::genRandomPassword(16);
@@ -733,37 +733,23 @@ class ContentModelArticle extends JModelAdmin
         	$query = $db->getQuery(true);
 
         	$query
-             		->select('*')
+             		->select('sharetoken')
              		->from($db->quoteName('#__share_draft'))
              		->where($db->quoteName('articleId') . '=' . $db->quote($this->get('id')));
 
-       		$db->execute();
-       		$num_rows = $db->getNumRows();
+       		$db->setQuery($query);
+       		$token = $db->loadResult();
 
-       		if ($num_rows !== null)
-       		{
-            		$query = $db->getQuery(true);
-
-            		$query
-             			->select('sharetoken')
-             			->from($db->quoteName('#__share_draft'))
-             			->where($db->quoteName('id') . ' = ' . $db->quote($this->get('id')));
-
-           		$db->execute();
-           		$token = $db->loadObject();
-           	
-       			
-       		}
-       		else
+       		if (empty($token))
       		{ 
            		$token = $this->shareTokenGenerate();
            		$date = JFactory::getDate();
            		$data = array('articleId' => $this->get('id'), 'sharetoken' => $token, 'created' =>$date);
            		$table->save($data);
       			
-      		 }
+      		}
       		 
-      		 return $token;
+      		return $token;
 		
 	}
 	
