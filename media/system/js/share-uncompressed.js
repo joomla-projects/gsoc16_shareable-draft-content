@@ -7,42 +7,36 @@
 /**
  * Calls the sending process of the config class
  */
-(function ($) {
-	$(document).ready(function ($) {
-		Joomla.submitbutton = function (task) {
-			if (task == 'shareDraft') {
-				var share_draft = {
-					articleId: $('#jform_id').val(),
-					title: $('#jform_title').val()
-				};
+var shareDraft;
 
-				// Remove js messages, if they exist.
-				Joomla.removeMessages();
-
-                return false;
-				
-				$.ajax({
-					type:"POST",
-					url: 'index.php?option=com_content&task=article.shareDraft&format=json',
-					data: share_draft,
-					dataType: "json"
-				})
-				.done(function (response) {
-					alert("Success");
-					// Render messages, if any.
-					if (typeof response.messages == 'object' && response.messages !== null) {
-						Joomla.renderMessages(response.messages);
-						window.scrollTo(0, 0);
-					}
-				})
-				.fail(function (xhr, ajaxOptions, thrownError) {
-					alert("fail"),
-					Joomla.renderMessages(xhr.responseText);
-					window.scrollTo(0, 0);
-				});
-			} else {
-				joomla.submitform(task);
-			}
+jQuery(document).ready(function($)
+{
+	shareDraft = function () {
+		var share_draft = {
+			articleId: $('#jform_id').val(),
+			title: $('#jform_title').val()
 		};
-	});
-})(jQuery);
+
+		// Remove js messages, if they exist.
+		Joomla.removeMessages();
+		
+		$.ajax({
+			type:"POST",
+			url: 'index.php?option=com_content&task=article.shareDraft&format=json&' + sessionToken + '=1',
+			data: share_draft,
+			dataType: "json"
+		})
+		.done(function (response) {
+			// Render messages, if any.
+			if (response.success == true) {
+				Joomla.renderMessages({info: [response.data]});
+				window.scrollTo(0, 0);
+			}
+		})
+		.fail(function (xhr, ajaxOptions, thrownError) {
+			alert("fail"),
+			Joomla.renderMessages(xhr.responseText);
+			window.scrollTo(0, 0);
+		});
+	}
+});
