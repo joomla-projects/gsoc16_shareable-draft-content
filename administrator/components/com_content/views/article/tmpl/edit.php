@@ -64,7 +64,12 @@ if (isset($this->item->attribs['show_urls_images_backend']) && $this->item->attr
 JFactory::getDocument()->addScriptDeclaration('
 	Joomla.submitbutton = function(task)
 	{
-		
+		if (task === "article.shareDraft")
+		{
+			shareDraft();
+			return false;
+		}
+
 		if (task == "article.cancel" || document.formvalidator.isValid(document.getElementById("item-form")))
 		{
 			jQuery("#permissions-sliders select").attr("disabled", "disabled");
@@ -84,10 +89,11 @@ $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout = $isModal ? 'modal' : 'edit';
 $tmpl = $isModal ? '&tmpl=component' : '';
 
-JHtml::script('system/share-uncompressed.js', false, true);
 JFactory::getDocument()->addScriptDeclaration('
- 	var sharebutton_url = "' . addslashes(JUri::base()) . 'index.php?option=com_content&task=article.shareDraft&format=json&' . JSession::getFormToken() . '=1";
+	var sessionToken = "' . JSession::getFormToken() . '";
   ');
+JHtml::script('system/share-uncompressed.js', false, true);
+
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_content&layout=' . $layout . $tmpl . '&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
