@@ -709,7 +709,7 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @return  boolean  True on success.
 	 *
-	 * @since 3.7
+	 * @since _DEPLOY_VERSION_
 	 */
 	public function shareTokenGenerate()
 	{
@@ -724,7 +724,7 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @return  token.
 	 *
-	 * @since   3.7
+	 * @since  _DEPLOY_VERSION_
 	 */
 	public function shareToken()
 	{
