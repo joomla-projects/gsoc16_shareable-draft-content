@@ -13,13 +13,13 @@ jQuery(document).ready(function($)
 {
 	shareDraft = function () {
 		var share_draft = {
-			articleId: $('#jform_id').val(),
+			id: articleId,
 			title: $('#jform_title').val()
 		};
 
 		// Remove js messages, if they exist.
 		Joomla.removeMessages();
-		
+
 		$.ajax({
 			type:"POST",
 			url: 'index.php?option=com_content&task=article.shareDraft&format=json&' + sessionToken + '=1',
