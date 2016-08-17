@@ -28,7 +28,8 @@ jQuery(document).ready(function($)
 		.done(function (response) {
 			// Render messages, if any.
 			if (response.success == true) {
-				Joomla.renderMessages({info: [response.data]});
+				var shareLink = '<a href="' + response.data + '">' + response.data + '</a>';
+				Joomla.renderMessages({info: [shareLink]});
 				window.scrollTo(0, 0);
 			}
 		})
