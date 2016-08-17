@@ -736,7 +736,7 @@ class ContentModelArticle extends JModelAdmin
         	$query = $db->getQuery(true);
 
         	$query
-             		->select('sharetoken')
+             		->select($db->quoteName('sharetoken'))
              		->from($db->quoteName('#__share_draft'))
              		->where($db->quoteName('articleId') . '=' . $db->quote($articleId));
 
@@ -752,7 +752,9 @@ class ContentModelArticle extends JModelAdmin
       			
       		 }
       		 
-      		return $token;
+      		$link = JUri::root() . 'index.php?option=com_content&view=article&id=' . $articleId . '&share=' . $token;
+      		
+      		return $link;
 		
 	}
 	
