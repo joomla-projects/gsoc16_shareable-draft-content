@@ -14,7 +14,6 @@ jQuery(document).ready(function($)
 	shareDraft = function () {
 		var share_draft = {
 			id: articleId,
-			title: $('#jform_title').val()
 		};
 
 		// Remove js messages, if they exist.
