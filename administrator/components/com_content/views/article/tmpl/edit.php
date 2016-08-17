@@ -91,6 +91,7 @@ $tmpl = $isModal ? '&tmpl=component' : '';
 
 JFactory::getDocument()->addScriptDeclaration('
 	var sessionToken = "' . JSession::getFormToken() . '";
+	var articleId    = "' . $this->item->id . '";
   ');
 JHtml::script('system/share-uncompressed.js', false, true);
 
