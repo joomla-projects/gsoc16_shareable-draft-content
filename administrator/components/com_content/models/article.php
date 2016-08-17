@@ -729,13 +729,16 @@ class ContentModelArticle extends JModelAdmin
 	public function shareToken()
 	{
 		$table = $this->getTable('Share', 'ContentTable');
+		$jinput = JFactory::getApplication()->input;
+		$articleId = $jinput->get('id', 0);
+		
         	$db = $this->getDbo();
         	$query = $db->getQuery(true);
 
         	$query
              		->select('sharetoken')
              		->from($db->quoteName('#__share_draft'))
-             		->where($db->quoteName('articleId') . '=' . $db->quote($this->get('id')));
+             		->where($db->quoteName('articleId') . '=' . $db->quote($articleId));
 
        		$db->setQuery($query);
        		$token = $db->loadResult();
@@ -744,10 +747,10 @@ class ContentModelArticle extends JModelAdmin
       		{ 
            		$token = $this->shareTokenGenerate();
            		$date = JFactory::getDate();
-           		$data = array('articleId' => $this->get('id'), 'sharetoken' => $token, 'created' =>$date);
+           		$data = array('articleId' => $articleId, 'sharetoken' => $token, 'created' =>$date);
            		$table->save($data);
       			
-      		 }
+      		}
       		 
       		return $token;
 		
