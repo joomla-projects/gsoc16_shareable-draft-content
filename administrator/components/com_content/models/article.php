@@ -746,11 +746,11 @@ class ContentModelArticle extends JModelAdmin
        		if (empty($token))
       		{ 
            		$token = $this->shareTokenGenerate();
-           		$date = JFactory::getDate();
+           		$date = JFactory::getDate()->toSql();
            		$data = array('articleId' => $articleId, 'sharetoken' => $token, 'created' =>$date);
            		$table->save($data);
       			
-      		}
+      		 }
       		 
       		return $token;
 		
