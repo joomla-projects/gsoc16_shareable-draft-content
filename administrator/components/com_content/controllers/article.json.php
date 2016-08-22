@@ -27,6 +27,8 @@
 		 public function shareDraft()
 		 {
 				  $app    = JFactory::getApplication();
+				  $jinput = JFactory::getApplication()->input;
+        			  $articleId = $jinput->get('id', 0);
 		
 				  if (!JSession::checkToken('get'))
 				  {
@@ -42,7 +44,7 @@
 				  {
 					// Get the model
 					$model = $this->getModel();
-					$return = $model->shareToken();
+					$return = $model->shareToken($articleId);
 				  }
 				  catch (Exception $e)
 				  {
