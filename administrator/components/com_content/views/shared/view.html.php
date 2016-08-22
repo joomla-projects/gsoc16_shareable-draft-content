@@ -36,6 +36,7 @@ class ContentViewShared extends JViewLegacy
 		$this->authors       = $this->get('Authors');
 		$this->filterForm    = $this->get('FilterForm');
 		$this->activeFilters = $this->get('ActiveFilters');
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
@@ -55,6 +56,7 @@ class ContentViewShared extends JViewLegacy
 		$options[] = JHtml::_('select.option', '9', JText::_('J9'));
 		$options[] = JHtml::_('select.option', '10', JText::_('J10'));
 		$this->f_levels = $options;
+		
 		// We don't need toolbar in the modal window.
 		if ($this->getLayout() !== 'modal')
 		{
@@ -70,8 +72,10 @@ class ContentViewShared extends JViewLegacy
 				// If the language is forced we can't allow to select the language, so transform the language selector filter into an hidden field.
 				$languageXml = new SimpleXMLElement('<field name="language" type="hidden" default="' . $forcedLanguage . '" />');
 				$this->filterForm->setField($languageXml, 'filter', true);
+				
 				// Also, unset the active language filter so the search tools is not open by default with this filter.
 				unset($this->activeFilters['language']);
+				
 				// One last changes needed is to change the category filter to just show categories with All language or with the forced language.
 				$this->filterForm->setFieldAttribute('category_id', 'language', '*,' . $forcedLanguage, 'filter');
 			}
@@ -89,6 +93,7 @@ class ContentViewShared extends JViewLegacy
 	{
 		$canDo = JHelperContent::getActions('com_content', 'category', $this->state->get('filter.category_id'));
 		$user  = JFactory::getUser();
+		
 		// Get the toolbar object instance
 		$bar = JToolbar::getInstance('toolbar');
 		JToolbarHelper::title(JText::_('COM_CONTENT_ARTICLES_TITLE'), 'stack article');
@@ -115,6 +120,7 @@ class ContentViewShared extends JViewLegacy
 			&& $user->authorise('core.edit.state', 'com_content'))
 		{
 			$title = JText::_('JTOOLBAR_BATCH');
+			
 			// Instantiate a new JLayoutFile instance and render the batch button
 			$layout = new JLayoutFile('joomla.toolbar.batch');
 			$dhtml = $layout->render(array('title' => $title));
