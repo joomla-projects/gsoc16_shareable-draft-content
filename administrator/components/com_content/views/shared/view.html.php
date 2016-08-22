@@ -44,7 +44,8 @@ class ContentViewShared extends JViewLegacy
         $this->activeFilters = $this->get('ActiveFilters');
 
         // Check for errors.
-        if (count($errors = $this->get('Errors'))) {
+        if (count($errors = $this->get('Errors'))) 
+        {
             JError::raiseError(500, implode("\n", $errors));
 
             return false;
@@ -121,8 +122,8 @@ class ContentViewShared extends JViewLegacy
         }
         // Add a batch button
         if ($user->authorise('core.create', 'com_content')
-            && $user->authorise('core.edit', 'com_content')
-            && $user->authorise('core.edit.state', 'com_content'))
+         && $user->authorise('core.edit', 'com_content')
+         && $user->authorise('core.edit.state', 'com_content'))
         {
 
             $title = JText::_('JTOOLBAR_BATCH');
