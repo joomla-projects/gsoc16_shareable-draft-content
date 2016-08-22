@@ -726,13 +726,11 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @since  _DEPLOY_VERSION_
 	 */
-	public function shareToken()
+	public function shareToken($articleId)
 	{
 		$table = $this->getTable('Share', 'ContentTable');
-		$jinput = JFactory::getApplication()->input;
-		$articleId = $jinput->get('id', 0);
-		
-        	$db = $this->getDbo();
+	
+		$db = $this->getDbo();
         	$query = $db->getQuery(true);
 
         	$query
