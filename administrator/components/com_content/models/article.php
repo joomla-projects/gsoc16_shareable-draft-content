@@ -722,6 +722,8 @@ class ContentModelArticle extends JModelAdmin
 	/**
 	 * Method to store the token generated.
 	 *
+	 * @param   object  $articleId  Gives articleId of the article.
+	 * 
 	 * @return  token.
 	 *
 	 * @since  _DEPLOY_VERSION_
