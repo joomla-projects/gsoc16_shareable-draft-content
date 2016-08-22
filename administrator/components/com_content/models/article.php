@@ -730,16 +730,15 @@ class ContentModelArticle extends JModelAdmin
 	{
 		$table = $this->getTable('Share', 'ContentTable');
 	
-		$db = $this->getDbo();
-        	$query = $db->getQuery(true);
+		$query = $this->_db->getQuery(true);
 
-        	$query
-             		->select($db->quoteName('sharetoken'))
-             		->from($db->quoteName('#__share_draft'))
-             		->where($db->quoteName('articleId') . '=' . $db->quote($articleId));
+		$query
+             		->select($this->_db->quoteName('sharetoken'))
+             		->from($this->_db->quoteName('#__share_draft'))
+             		->where($this->_db->quoteName('articleId') . '=' . $this->_db->quote($articleId));
 
        		$db->setQuery($query);
-       		$token = $db->loadResult();
+       		$token = $this->_db->loadResult();
 
        		if (empty($token))
       		{ 
