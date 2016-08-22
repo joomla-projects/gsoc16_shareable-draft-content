@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @since  3.7
  */
-class ContentViewArticles extends JViewLegacy
+class ContentViewShared extends JViewLegacy
 {
     protected $items;
 
