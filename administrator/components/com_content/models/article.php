@@ -739,7 +739,7 @@ class ContentModelArticle extends JModelAdmin
              		->from($this->_db->quoteName('#__share_draft'))
              		->where($this->_db->quoteName('articleId') . '=' . $this->_db->quote($articleId));
 
-       		$db->setQuery($query);
+       		$this->_db->setQuery($query);
        		$token = $this->_db->loadResult();
 
        		if (empty($token))
