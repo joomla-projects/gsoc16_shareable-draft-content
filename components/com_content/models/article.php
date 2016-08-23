@@ -157,12 +157,12 @@ class ContentModelArticle extends JModelItem
         			$queryy
              				->select($db->quoteName('id'))
              				->from($db->quoteName('#__share_draft'))
-             				->where($db->quoteName('sharetoken') . '=' . $currentToken);
+             				->where($db->quoteName('sharetoken') . '=' . $db->quote($currentToken));
 
        				$db->setQuery($queryy);
        				$haveToken = $db->loadResult();
 
-				if (is_numeric($published) || ($haveToken))
+				if (is_numeric($published) && !($haveToken))
 				{
 					$query->where('(a.state = ' . (int) $published . ' OR a.state =' . (int) $archived . ')');
 				}
@@ -177,7 +177,7 @@ class ContentModelArticle extends JModelItem
 				}
 
 				// Check for published state if filter set.
-				if (((is_numeric($published)) || (is_numeric($archived))) && (($data->state != $published) || !($haveToken)) && ($data->state != $archived)))
+				if (((is_numeric($published)) || (is_numeric($archived))) && (($data->state != $published) && !($haveToken)) && ($data->state != $archived)))
 				{
 					return JError::raiseError(404, JText::_('COM_CONTENT_ERROR_ARTICLE_NOT_FOUND'));
 				}
