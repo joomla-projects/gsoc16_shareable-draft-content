@@ -9,9 +9,7 @@
  */
 var shareDraft;
 
-shareDraft()
-{
-	shareDraft = function () {
+shareDraft = function () {
 		var share_draft = {
 			id: articleId,
 		};
@@ -19,7 +17,7 @@ shareDraft()
 		// Remove js messages, if they exist.
 		Joomla.removeMessages();
 
-		$.ajax({
+		jQuery.ajax({
 			type:"POST",
 			url: 'index.php?option=com_content&task=article.shareDraft&format=json&' + sessionToken + '=1',
 			data: share_draft,
@@ -38,6 +36,6 @@ shareDraft()
 			Joomla.renderMessages(xhr.responseText);
 			window.scrollTo(0, 0);
 		});
-	}
 }
+
 
