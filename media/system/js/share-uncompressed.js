@@ -9,7 +9,7 @@
  */
 var shareDraft;
 
-jQuery(document).ready(function($)
+shareDraft()
 {
 	shareDraft = function () {
 		var share_draft = {
@@ -38,5 +38,5 @@ jQuery(document).ready(function($)
 			Joomla.renderMessages(xhr.responseText);
 			window.scrollTo(0, 0);
 		});
-	}
-});
+}
+
