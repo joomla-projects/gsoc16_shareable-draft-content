@@ -181,7 +181,6 @@ class ContentModelArticle extends JModelItem
 				{
 					if ($haveToken == 0)
 					{
-						
 						return JError::raiseError(404, JText::_('COM_CONTENT_ERROR_ARTICLE_NOT_FOUND'));
 					}
 				}
