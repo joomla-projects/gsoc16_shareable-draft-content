@@ -32,7 +32,6 @@ shareDraft = function () {
 			}
 		})
 		.fail(function (xhr, ajaxOptions, thrownError) {
-			alert("fail"),
 			Joomla.renderMessages(xhr.responseText);
 			window.scrollTo(0, 0);
 		});
