@@ -38,5 +38,6 @@ shareDraft()
 			Joomla.renderMessages(xhr.responseText);
 			window.scrollTo(0, 0);
 		});
+	}
 }
 
