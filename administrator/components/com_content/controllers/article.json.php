@@ -48,8 +48,8 @@
 				  }
 				  catch (Exception $e)
 				  {
-						  $error = true;
-						  $message = JText::_('COM_CONTENT_TOKEN_ERROR');
+					$error = true;
+					$message = JText::_('COM_CONTENT_TOKEN_ERROR');
 				  }
 		
 				  echo new JResponseJson($return, $message, $error);
