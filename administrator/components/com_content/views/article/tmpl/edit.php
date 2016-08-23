@@ -123,7 +123,7 @@ JHtml::script('system/share.js', false, true);
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('COM_CONTENT_FIELDSET_PUBLISHING')); ?>
 			<div class="row-fluid form-horizontal-desktop">
 				<div class="span6">
-					<?php echo JLayoutHelper::render('joomla.edit.publishingta', $this); ?>
+					<?php echo JLayoutHelper::render('joomla.edit.publishingdata', $this); ?>
 				</div>
 				<div class="span6">
 					<?php echo JLayoutHelper::render('joomla.edit.metadata', $this); ?>
