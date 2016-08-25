@@ -32,6 +32,7 @@ class ContentControllerArticle extends JControllerForm
 		if (!JSession::checkToken('get'))
 		{
 			echo new JResponseJson(null, JText::_('JINVALID_TOKEN'), true);
+
 			$app->close();
 		}
 
@@ -51,6 +52,7 @@ class ContentControllerArticle extends JControllerForm
 		}
 
 		echo new JResponseJson($return, $message, $error);
+
 		$app->close();
 	}
 }
