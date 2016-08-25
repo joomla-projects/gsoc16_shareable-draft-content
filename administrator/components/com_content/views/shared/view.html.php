@@ -99,7 +99,7 @@ class ContentViewShared extends JViewLegacy
 		{
 			JToolbarHelper::preferences('com_content');
 		}
-		JToolbarHelper::help('JHELP_CONTENT_FEATURED_ARTICLES');
+		JToolbarHelper::help('JHELP_CONTENT_SHARED_ARTICLES');
 	}
 	/**
 	 * Returns an array of fields the table can be sorted by
