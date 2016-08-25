@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 /**
  * View class for a list of shared articles.
  *
- * @since  1.6
+ * @since  _DEPLOY_VERSION_
  */
 class ContentViewShared extends JViewLegacy
 {
@@ -64,13 +64,13 @@ class ContentViewShared extends JViewLegacy
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   _DEPLOY_VERSION_
 	 */
 	protected function addToolbar()
 	{
 		$state = $this->get('State');
 		$canDo = JHelperContent::getActions('com_content', 'category', $this->state->get('filter.category_id'));
-		JToolbarHelper::title(JText::_('COM_CONTENT_SHARED_TITLE'), 'star featured');
+		JToolbarHelper::title(JText::_('COM_CONTENT_SHARED_TITLE'));
 		if ($canDo->get('core.create'))
 		{
 			JToolbarHelper::addNew('article.add');
@@ -106,7 +106,7 @@ class ContentViewShared extends JViewLegacy
 	 *
 	 * @return  array  Array containing the field name to sort by as the key and display text as value
 	 *
-	 * @since   3.0
+	 * @since   _DEPLOY_VERSION_
 	 */
 	protected function getSortFields()
 	{
@@ -122,21 +122,4 @@ class ContentViewShared extends JViewLegacy
 			'a.id' => JText::_('JGRID_HEADING_ID')
 		);
 	}
-	/**
-	 * Form method
-	 *
-	 * @return  form object
-	 *
-	 * @since   _DEPLOY_VERSION_
-	 */
-	 public function getForm()
-	{
-    		if (!is_object($this->form))
-    		{
-        		$this->form = $this->get('Form');
-    		}
-
-    		return $this->form;
-	}
-	
 }
