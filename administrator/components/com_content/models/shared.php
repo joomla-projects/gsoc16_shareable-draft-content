@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 /**
  * About Page Model
  *
- * @since  1.6
+ * @since   _DEPLOY_VERSION_
  */
 class ContentModelShared extends JModelList
 {
@@ -20,7 +20,7 @@ class ContentModelShared extends JModelList
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
 	 * @see     JController
-	 * @since   1.6
+	 * @since    _DEPLOY_VERSION_
 	 */
 	public function __construct($config = array())
 	{
@@ -62,7 +62,7 @@ class ContentModelShared extends JModelList
 	 *
 	 * @return  string
 	 *
-	 * @since   1.6
+	 * @since    _DEPLOY_VERSION_
 	 */
 	protected function getListQuery($resolveFKs = true)
 	{
@@ -191,10 +191,18 @@ class ContentModelShared extends JModelList
 	 *
 	 * @return  void
 	 *
-	 * @since   3.5
+	 * @since    _DEPLOY_VERSION_
 	 */
 	protected function populateState($ordering = 'a.title', $direction = 'asc')
 	{
 		parent::populateState($ordering, $direction);
+	}
+	/**
+ 	 * Method to get the record form.
+ 	 *
+ 	 * @since   _DEPLOY_VERSION_
+ 	 */
+	public function getForm()
+	{
 	}
 }
