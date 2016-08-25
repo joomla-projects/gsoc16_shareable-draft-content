@@ -731,7 +731,7 @@ class ContentModelArticle extends JModelAdmin
 	public function shareToken($articleId)
 	{
 		// checking for valid articleId
-		if ($articleId == 0)
+		if ((int) $articleId == 0)
 		{
 			throw new  InvalidArgumentException(JText::_('COM_CONTENT_INVALID_ARTICLEID'));
 			
