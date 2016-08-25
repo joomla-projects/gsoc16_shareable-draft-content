@@ -33,20 +33,4 @@ class ContentModelShare extends JModelAdmin
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
-
-	/**
-	 * A protected method to get a set of ordering conditions.
-	 *
-	 * @param   object  $table  A record object.
-	 *
-	 * @return  array  An array of conditions to add to add to ordering queries.
-	 *
-	 * @since   1.6
-	 */
-	protected function getReorderConditions($table)
-	{
-		$condition = array();
-
-		return $condition;
-	}
 }
