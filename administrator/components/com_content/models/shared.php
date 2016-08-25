@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 /**
  * About Page Model
  *
- * @since   _DEPLOY_VERSION_
+ * @since  _DEPLOY_VERSION_
  */
 class ContentModelShared extends JModelList
 {
@@ -69,6 +69,7 @@ class ContentModelShared extends JModelList
 		// Create a new query object.
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
+
 		// Select the required fields from the table.
 		$query->select(
 			$this->getState(
@@ -78,25 +79,32 @@ class ContentModelShared extends JModelList
 			)
 		);
 		$query->from('#__content AS a');
-		// Join over the language
+
+        // Join over the language
 		$query->select('l.title AS language_title, l.image AS language_image')
 			->join('LEFT', $db->quoteName('#__languages') . ' AS l ON l.lang_code = a.language');
-		// Join over the content table.
+
+        // Join over the content table.
 		$query->select('fp.ordering')
 			->join('INNER', '#__content_frontpage AS fp ON fp.content_id = a.id');
-		// Join over the users for the checked out user.
+
+        // Join over the users for the checked out user.
 		$query->select('uc.name AS editor')
 			->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
-		// Join over the asset groups.
+
+        // Join over the asset groups.
 		$query->select('ag.title AS access_level')
 			->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
-		// Join over the categories.
+
+        // Join over the categories.
 		$query->select('c.title AS category_title')
 			->join('LEFT', '#__categories AS c ON c.id = a.catid');
-		// Join over the users for the author.
+
+        // Join over the users for the author.
 		$query->select('ua.name AS author_name')
 			->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
-		// Filter by access level.
+
+        // Filter by access level.
 		if ($access = $this->getState('filter.access'))
 		{
 			$query->where('a.access = ' . (int) $access);
@@ -201,7 +209,7 @@ class ContentModelShared extends JModelList
  	 * Method to get the record form.
  	 *
  	 * @since   _DEPLOY_VERSION_
- 	 */
+     */
 	public function getForm()
 	{
 	}

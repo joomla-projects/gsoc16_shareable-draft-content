@@ -28,6 +28,7 @@ class ContentControllerShared extends ContentControllerArticles
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		$user = JFactory::getUser();
 		$ids  = $this->input->get('cid', array(), 'array');
+
 		// Access checks.
 		foreach ($ids as $i => $id)
 		{
@@ -46,7 +47,8 @@ class ContentControllerShared extends ContentControllerArticles
 		{
 			// Get the model.
 			$model = $this->getModel();
-			// Remove the items.
+
+            // Remove the items.
 			if (!$model->featured($ids, 0))
 			{
 				JError::raiseWarning(500, $model->getError());
