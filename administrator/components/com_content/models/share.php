@@ -12,9 +12,9 @@ defined('_JEXEC') or die;
 require_once __DIR__ . '/article.php';
 
 /**
- * Feature model.
+ * Share content controller class.
  *
- * @since  1.6
+ * @since  __DEPLOY_VERSION__
  */
 class ContentModelShare extends JModelAdmin
 {
