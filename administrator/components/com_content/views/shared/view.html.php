@@ -15,7 +15,9 @@ defined('_JEXEC') or die;
 class ContentViewShared extends JViewLegacy
 {
 	protected $items;
+	
 	protected $pagination;
+	
 	protected $state;
 	/**
 	 * Display the view
@@ -33,6 +35,7 @@ class ContentViewShared extends JViewLegacy
 		$this->authors       = $this->get('Authors');
 		$this->filterForm    = $this->get('FilterForm');
 		$this->activeFilters = $this->get('ActiveFilters');
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
