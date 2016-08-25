@@ -122,4 +122,21 @@ class ContentViewShared extends JViewLegacy
 			'a.id' => JText::_('JGRID_HEADING_ID')
 		);
 	}
+	/**
+	 * Form method
+	 *
+	 * @return  form object
+	 *
+	 * @since   _DEPLOY_VERSION_
+	 */
+	 public function getForm()
+	{
+    		if (!is_object($this->form))
+    		{
+        		$this->form = $this->get('Form');
+    		}
+
+    		return $this->form;
+	}
+	
 }
