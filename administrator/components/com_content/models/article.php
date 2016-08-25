@@ -730,6 +730,13 @@ class ContentModelArticle extends JModelAdmin
 	 */
 	public function shareToken($articleId)
 	{
+		//checking for valid articleId
+		if ($articleId == 0)
+		{
+			$this->setError(JText::_('COM_CONTENT_INVALID_ARTICLEID'));
+			
+			return false;
+		}
 		$table = $this->getTable('Share', 'ContentTable');
 	
 		$query = $this->_db->getQuery(true);
