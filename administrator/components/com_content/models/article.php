@@ -733,7 +733,7 @@ class ContentModelArticle extends JModelAdmin
 		//checking for valid articleId
 		if ($articleId == 0)
 		{
-			$this->setError(JText::_('COM_CONTENT_INVALID_ARTICLEID'));
+			throw new Exception(JText::_('COM_CONTENT_INVALID_ARTICLEID'));
 			
 			return false;
 		}
