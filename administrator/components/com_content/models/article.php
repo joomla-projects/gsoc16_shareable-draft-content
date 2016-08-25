@@ -737,6 +737,7 @@ class ContentModelArticle extends JModelAdmin
 			
 			return false;
 		}
+		
 		$table = $this->getTable('Share', 'ContentTable');
 	
 		$query = $this->_db->getQuery(true);
