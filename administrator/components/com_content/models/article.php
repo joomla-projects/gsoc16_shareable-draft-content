@@ -705,18 +705,17 @@ class ContentModelArticle extends JModelAdmin
 	}
 
 	/**
-	 * Method to store the token generated.
+	 * Method to get a random token
 	 *
-	 * @return  boolean  True on success.
+	 * @return  integer  The share Token
 	 *
-	 * @since _DEPLOY_VERSION_
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function shareTokenGenerate()
 	{
 		jimport('joomla.user.helper');
-		$token = JUserHelper::genRandomPassword(16);
 
-		return $token;
+		return JUserHelper::genRandomPassword(16);
 	}
 
 	/**
@@ -724,9 +723,9 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @param   object  $articleId  Gives articleId of the article.
 	 * 
-	 * @return  token.
+	 * @return  string  The link with the token
 	 *
-	 * @since  _DEPLOY_VERSION_
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function shareToken($articleId)
 	{
@@ -734,35 +733,34 @@ class ContentModelArticle extends JModelAdmin
 		if ((int) $articleId == 0)
 		{
 			throw new  InvalidArgumentException(JText::_('COM_CONTENT_INVALID_ARTICLEID'));
-			
+
 			return false;
 		}
-		
+
 		$table = $this->getTable('Share', 'ContentTable');
-	
-		$query = $this->_db->getQuery(true);
 
-		$query
-             		->select($this->_db->quoteName('sharetoken'))
-             		->from($this->_db->quoteName('#__share_draft'))
-             		->where($this->_db->quoteName('articleId') . '=' . $this->_db->quote($articleId));
+		$query = $this->_db->getQuery(true)
+			->select($this->_db->quoteName('sharetoken'))
+			->from($this->_db->quoteName('#__share_draft'))
+			->where($this->_db->quoteName('articleId') . '=' . $this->_db->quote($articleId));
 
-       		$this->_db->setQuery($query);
-       		$token = $this->_db->loadResult();
+		$this->_db->setQuery($query);
+		$token = $this->_db->loadResult();
 
-       		if (empty($token))
-      		{ 
-           		$token = $this->shareTokenGenerate();
-           		$date = JFactory::getDate()->toSql();
-           		$data = array('articleId' => $articleId, 'sharetoken' => $token, 'created' =>$date);
-           		$table->save($data);
-      			
-      		 }
-      		 
-      		$link = JUri::root() . 'index.php?option=com_content&view=article&id=' . $articleId . '&share=' . $token;
-      		
-      		return $link;
-		
+		if (empty($token))
+		{ 
+			$token = $this->shareTokenGenerate();
+			$data = array(
+				'articleId'  => $articleId,
+				'sharetoken' => $token,
+				'created'    => JFactory::getDate()->toSql(),
+			);
+
+			$table->save($data);
+		}
+
+		return JUri::root() . 'index.php?option=com_content&view=article&id=' . $articleId . '&share=' . $token;
+
 	}
 	
 

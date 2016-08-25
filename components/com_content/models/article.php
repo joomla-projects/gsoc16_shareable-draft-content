@@ -147,20 +147,17 @@ class ContentModelArticle extends JModelItem
 
 				// Filter by published state.
 				$published = $this->getState('filter.published');
-				$archived = $this->getState('filter.archived');
-				
-				$app = JFactory::getApplication();
-				$currentToken = $app->input->get('share', 'string', '');
-				
-				$queryy = $db->getQuery(true);
+				$archived  = $this->getState('filter.archived');
 
-        			$queryy
-             				->select($db->quoteName('id'))
-             				->from($db->quoteName('#__share_draft'))
-             				->where($db->quoteName('sharetoken') . '=' . $db->quote($currentToken));
+				$currentToken = JFactory::getApplication()->input->get('share', 'string', '');
 
-       				$db->setQuery($queryy);
-       				$haveToken = $db->loadResult();
+				$tokenQuery = $db->getQuery(true)
+					->select($db->quoteName('id'))
+					->from($db->quoteName('#__share_draft'))
+					->where($db->quoteName('sharetoken') . '=' . $db->quote($currentToken));
+
+				$db->setQuery($tokenQuery);
+				$haveToken = $db->loadResult();
 
 				if (is_numeric($published) && !($haveToken))
 				{

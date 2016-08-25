@@ -8,51 +8,49 @@
  */
  
  defined('_JEXEC') or die;
-/**
- * The article controller
+
+ /**
+ * The article json controller
  *
- * @package     Joomla.Administrator
- * @subpackage  com_content
- * @since       1.6
+ * @since  __DEPLOY_VERSION__
  */
- class ContentControllerArticle extends JControllerForm
+class ContentControllerArticle extends JControllerForm
 {
-		/**
-		 * Method to generate and store share token.
-		 *
-		 * @return  boolean   True if token successfully stored, false otherwise and internal error is set.
-		 *
-		 * @since   3.7
-		 */
-		 public function shareDraft()
-		 {
-				  $app    = JFactory::getApplication();
-				  $jinput = JFactory::getApplication()->input;
-        			  $articleId = $jinput->get('id', 0);
-		
-				  if (!JSession::checkToken('get'))
-				  {
-					echo new JResponseJson(null, JText::_('JINVALID_TOKEN'), true);
-					$app->close();
-				  }
-		
-				  $return = false;
-				  $error = false;
-				  $message = JText::_('COM_CONTENT_TOKEN_SAVED');
-		
-				  try
-				  {
-					// Get the model
-					$model = $this->getModel();
-					$return = $model->shareToken($articleId);
-				  }
-				  catch (Exception $e)
-				  {
-					$error = true;
-					$message = JText::_('COM_CONTENT_TOKEN_ERROR');
-				  }
-		
-				  echo new JResponseJson($return, $message, $error);
-				  $app->close();
-		 }
- }
+	/**
+	 * Method to generate and store share token.
+	 *
+	 * @return  boolean   True if token successfully stored, false otherwise and internal error is set.
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function shareDraft()
+	{
+		$app       = JFactory::getApplication();
+		$jinput    = JFactory::getApplication()->input;
+		$articleId = $jinput->get('id', 0);
+
+		if (!JSession::checkToken('get'))
+		{
+			echo new JResponseJson(null, JText::_('JINVALID_TOKEN'), true);
+			$app->close();
+		}
+
+		$return  = false;
+		$error   = false;
+		$message = JText::_('COM_CONTENT_TOKEN_SAVED');
+	
+		try
+		{
+			// Get the model
+			$return = $this->getModel()->shareToken($articleId);
+		}
+		catch (Exception $e)
+		{
+			$error   = true;
+			$message = JText::_('COM_CONTENT_TOKEN_ERROR');
+		}
+
+		echo new JResponseJson($return, $message, $error);
+		$app->close();
+	}
+}
