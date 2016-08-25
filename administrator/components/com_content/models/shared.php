@@ -7,13 +7,12 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
-require_once __DIR__ . '/articles.php';
 /**
  * About Page Model
  *
  * @since  1.6
  */
-class ContentModelShared extends ContentModelArticles
+class ContentModelShared extends JModelList
 {
 	/**
 	 * Constructor.
