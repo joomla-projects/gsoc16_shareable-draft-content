@@ -208,6 +208,8 @@ class ContentModelShared extends JModelList
 	/**
  	 * Method to get the record form.
  	 *
+     * @return  void
+     * 
  	 * @since   _DEPLOY_VERSION_
      */
 	public function getForm()
