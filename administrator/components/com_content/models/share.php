@@ -18,19 +18,5 @@ require_once __DIR__ . '/article.php';
  */
 class ContentModelShare extends JModelAdmin
 {
-	/**
-	 * Returns a Table object, always creating it.
-	 *
-	 * @param   string  $type    The table type to instantiate
-	 * @param   string  $prefix  A prefix for the table class name. Optional.
-	 * @param   array   $config  Configuration array for model. Optional.
-	 *
-	 * @return  JTable	A database object
-	 *
-	 * @since   1.6
-	 */
-	public function getTable($type = 'Share', $prefix = 'ContentTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
+
 }
