@@ -16,7 +16,7 @@ require_once __DIR__ . '/article.php';
  *
  * @since  1.6
  */
-class ContentModelShare extends ContentModelArticle
+class ContentModelShare extends JModelAdmin
 {
 	/**
 	 * Returns a Table object, always creating it.
