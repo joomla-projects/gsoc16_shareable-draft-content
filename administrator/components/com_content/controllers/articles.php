@@ -105,6 +105,68 @@ class ContentControllerArticles extends JControllerAdmin
 	}
 
 	/**
+	 * Method to discard shared drafts.
+	 *
+	 * @return  void
+	 *
+	 * @since   1.6
+	 */
+	public function discardDraft()
+	{
+		// Check for request forgeries
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		$user   = JFactory::getUser();
+		$ids    = $this->input->get('cid', array(), 'array');
+		print_r($ids); exit;
+
+		// Access checks.
+		foreach ($ids as $i => $id)
+		{
+			if (!$user->authorise('core.edit.state', 'com_content.article.' . (int) $id))
+			{
+				// Prune items that you can't change.
+				unset($ids[$i]);
+				JError::raiseNotice(403, JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'));
+			}
+		}
+
+		if (empty($ids))
+		{
+			JError::raiseWarning(500, JText::_('JERROR_NO_ITEMS_SELECTED'));
+		}
+		else
+		{
+
+			// Get the model.
+			$model = $this->getModel('articles');
+
+			// Publish the items.
+			if (!$model->discardDraft($ids))
+			{
+				JError::raiseWarning(500, $model->getError());
+			}
+
+			if ($value == 1)
+			{
+				$message = JText::plural('COM_CONTENT_N_ITEMS_UNSHARED', count($ids));
+			}
+
+		}
+
+		$view = $this->input->get('view', '');
+
+		if ($view == 'shared')
+		{
+			$this->setRedirect(JRoute::_('index.php?option=com_content&view=shared', false), $message);
+		}
+		else
+		{
+			$this->setRedirect(JRoute::_('index.php?option=com_content&view=articles', false), $message);
+		}
+	}
+
+	/**
 	 * Proxy for getModel.
 	 *
 	 * @param   string  $name    The model name. Optional.

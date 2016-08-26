@@ -390,4 +390,44 @@ class ContentModelArticles extends JModelList
 
 		return $items;
 	}
+
+	/**
+	 * Method to discard Shared Drafts,
+	 * 
+	 * @param  $pk  A prefix for the passing ids.
+	 *
+	 * @return  mixed  An array of data items on success, false on failure.
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function discardDraft($pk)
+	{
+
+		// Sanitize the ids.
+		$pks = JArrayHelper::toInteger($pks);
+		
+		if (empty($pks))
+		{
+			$this->setError(JText::_('COM_CONTENT_NO_ITEM_SELECTED'));
+			return false;
+		}
+
+		try
+		{
+			$db = $this->getDbo();
+			$query = $db->getQuery(true)
+				->delete($db->quoteName('#__share_draft'))
+				->where($db->quoteName('articleId') . ' IN (' . implode(',', $pks) . ')');
+			$db->setQuery($query);
+			$db->execute();
+		}
+		catch (Exception $e)
+		{
+			$this->setError($e->getMessage());
+			
+			return false;
+		}
+		return true;
+
+	}
 }
