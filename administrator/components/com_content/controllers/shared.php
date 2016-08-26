@@ -49,12 +49,12 @@ class ContentControllerShared extends ContentControllerArticles
 			$model = $this->getModel();
 
             // Remove the items.
-			if (!$model->featured($ids, 0))
+			if (!$model->shared($ids, 0))
 			{
 				JError::raiseWarning(500, $model->getError());
 			}
 		}
-		$this->setRedirect('index.php?option=com_content&view=featured');
+		$this->setRedirect('index.php?option=com_content&view=shared');
 	}
 	/**
 	 * Method to publish a list of articles.
