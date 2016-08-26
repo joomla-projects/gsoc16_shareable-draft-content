@@ -78,7 +78,6 @@ $canOrder  = $user->authorise('core.edit.state', 'com_content.article');
 					<?php $count = count($this->items); ?>
 					<?php foreach ($this->items as $i => $item) :
 						$item->max_ordering = 0;
-						$token = ($listOrder == 'fp.sharetoken');
 						$ordering   = ($listOrder == 'fp.ordering');
 						$assetId    = 'com_content.article.' . $item->id;
 						$canCreate  = $user->authorise('core.create', 'com_content.category.' . $item->catid);
@@ -150,8 +149,8 @@ $canOrder  = $user->authorise('core.edit.state', 'com_content.article');
 
 							<td class="center hidden-phone">
 								<?php
-								$link= JUri::root() . 'index.php?option=com_content&view=article&id=' . $item->id . '&share=' . $this->token;
-                                echo JHtml::_('link', $link,'View the Shared Draft'); ?>
+								$link= JUri::root() . 'index.php?option=com_content&view=article&id=' . $item->id . '&share=' . $this->sharetoken;
+                                echo JHtml::_('link', $link, JText::_('COM_CONTENT_SHARED_DRAFT_VIEW')); ?>
 							</td>
 							<td class="nowrap small hidden-phone">
 								<?php echo JHtml::_('date', $item->created, JText::_('DATE_FORMAT_LC4')); ?>
