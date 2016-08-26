@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  * Share Table class.
  *
- * @since  3.7
+ * @since  __DEPLOY_VERSION__
  */
 class ContentTableShare extends JTable
 {
@@ -21,7 +21,7 @@ class ContentTableShare extends JTable
 	 *
 	 * @param   JDatabaseDriver  &$db  Database connector object
 	 *
-	 * @since   1.6
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function __construct(&$db)
 	{

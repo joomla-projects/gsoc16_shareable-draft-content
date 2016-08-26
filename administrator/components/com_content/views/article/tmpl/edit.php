@@ -92,7 +92,8 @@ $tmpl = $isModal ? '&tmpl=component' : '';
 JFactory::getDocument()->addScriptDeclaration('
 	var sessionToken = "' . JSession::getFormToken() . '";
 	var articleId    = "' . $this->item->id . '";
-  ');
+');
+
 JHtml::script('system/share.js', false, true);
 
 ?>
@@ -131,7 +132,7 @@ JHtml::script('system/share.js', false, true);
 			</div>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
 		<?php endif; ?>
-	
+
 		<?php // Do not show the images and links options if the edit form is configured not to. ?>
 		<?php if ($params->show_urls_images_backend == 1) : ?>
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'images', JText::_('COM_CONTENT_FIELDSET_URLS_AND_IMAGES')); ?>
