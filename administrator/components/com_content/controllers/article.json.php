@@ -19,7 +19,7 @@ class ContentControllerArticle extends JControllerForm
 	/**
 	 * Method to generate and store share token.
 	 *
-	 * @return  boolean   True if token successfully stored, false otherwise and internal error is set.
+	 * @return  boolean   True if token successfully stored, false otherwise.
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
