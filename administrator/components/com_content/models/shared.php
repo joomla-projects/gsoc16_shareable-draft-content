@@ -43,6 +43,7 @@ class ContentModelShared extends JModelList
 				'featured', 'a.featured',
 				'language', 'a.language',
 				'hits', 'a.hits',
+                'fp.articleId', 'fp.token',
 				'publish_up', 'a.publish_up',
 				'publish_down', 'a.publish_down',
 				'published', 'a.published',
@@ -84,7 +85,7 @@ class ContentModelShared extends JModelList
 			->join('LEFT', $db->quoteName('#__languages') . ' AS l ON l.lang_code = a.language');
 
         // Join over the content table.
-		$query->select('articleId')
+		$query->select('fp.articleId, fp.token')
 			->join('INNER', '#__share_draft AS fp ON fp.articleId = a.id');
 
         // Join over the users for the checked out user.
