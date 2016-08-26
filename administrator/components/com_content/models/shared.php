@@ -35,6 +35,7 @@ class ContentModelShared extends JModelList
 				'catid', 'a.catid', 'category_title',
 				'state', 'a.state',
 				'access', 'a.access', 'access_level',
+				'articleId',
 				'created', 'a.created',
 				'created_by', 'a.created_by',
 				'created_by_alias', 'a.created_by_alias',
@@ -44,7 +45,6 @@ class ContentModelShared extends JModelList
 				'hits', 'a.hits',
 				'publish_up', 'a.publish_up',
 				'publish_down', 'a.publish_down',
-				'fp.ordering',
 				'published', 'a.published',
 				'author_id',
 				'category_id',
@@ -84,8 +84,8 @@ class ContentModelShared extends JModelList
 			->join('LEFT', $db->quoteName('#__languages') . ' AS l ON l.lang_code = a.language');
 
         // Join over the content table.
-		$query->select('fp.ordering')
-			->join('INNER', '#__content_frontpage AS fp ON fp.content_id = a.id');
+		$query->select('articleId')
+			->join('INNER', '#__share_draft AS fp ON fp.articleId = a.id');
 
         // Join over the users for the checked out user.
 		$query->select('uc.name AS editor')

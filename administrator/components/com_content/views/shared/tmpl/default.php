@@ -16,12 +16,7 @@ $userId    = $user->get('id');
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
 $canOrder  = $user->authorise('core.edit.state', 'com_content.article');
-$saveOrder = $listOrder == 'fp.ordering';
-if ($saveOrder)
-{
-	$saveOrderingUrl = 'index.php?option=com_content&task=featured.saveOrderAjax&tmpl=component';
-	JHtml::_('sortablelist.sortable', 'articleList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
-}
+
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_content&view=shared'); ?>" method="post" name="adminForm" id="adminForm">
@@ -57,24 +52,19 @@ if ($saveOrder)
 						<th>
 							<?php echo JHtml::_('searchtools.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
 						</th>
-						<th width="10%" class="nowrap hidden-phone">
-							<?php echo JHtml::_('searchtools.sort', 'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?>
+						<th width="50%" class="nowrap center hidden-phone">
+							<?php echo JHtml::_('searchtools.sort', 'COM_CONTENT_SHARE_LINK', 'a.hits', $listDirn, $listOrder); ?>
 						</th>
-						<th width="10%" class="nowrap hidden-phone">
-							<?php echo JHtml::_('searchtools.sort', 'JAUTHOR', 'a.created_by', $listDirn, $listOrder); ?>
-						</th>
-						<th width="10%" class="nowrap hidden-phone">
-							<?php echo JHtml::_('searchtools.sort', 'JGRID_HEADING_LANGUAGE', 'language', $listDirn, $listOrder); ?>
-						</th>
+
 						<th width="10%" class="nowrap hidden-phone">
 							<?php echo JHtml::_('searchtools.sort', 'JDATE', 'a.created', $listDirn, $listOrder); ?>
 						</th>
-						<th width="1%" class="nowrap hidden-phone">
-							<?php echo JHtml::_('searchtools.sort', 'JGLOBAL_HITS', 'a.hits', $listDirn, $listOrder); ?>
-						</th>
+
+
 						<th width="1%" class="nowrap hidden-phone">
 							<?php echo JHtml::_('searchtools.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 						</th>
+
 					</tr>
 					</thead>
 					<tfoot>
@@ -143,7 +133,7 @@ if ($saveOrder)
 										<?php $language = $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
 									<?php endif; ?>
 									<?php if ($canEdit) : ?>
-										<a href="<?php echo JRoute::_('index.php?option=com_content&task=article.edit&return=featured&id=' . $item->id);?>" title="<?php echo JText::_('JACTION_EDIT'); ?>">
+										<a href="<?php echo JRoute::_('index.php?option=com_content&task=article.edit&return=shared&id=' . $item->id);?>" title="<?php echo JText::_('JACTION_EDIT'); ?>">
 											<?php echo $this->escape($item->title); ?></a>
 									<?php else : ?>
 										<span title="<?php echo JText::sprintf('JFIELD_ALIAS_LABEL', $this->escape($item->alias)); ?>"><?php echo $this->escape($item->title); ?></span>
@@ -156,33 +146,21 @@ if ($saveOrder)
 									</div>
 								</div>
 							</td>
-							<td class="small hidden-phone">
-								<?php echo $this->escape($item->access_level); ?>
-							</td>
-							<td class="small hidden-phone">
-								<?php if ($item->created_by_alias) : ?>
-									<?php echo $this->escape($item->author_name); ?>
-									<p class="smallsub"> <?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->created_by_alias)); ?></p>
-								<?php else : ?>
-									<?php echo $this->escape($item->author_name); ?>
-								<?php endif; ?>
-							</td>
-							<td class="small hidden-phone">
-								<?php if ($item->language == '*'):?>
-									<?php echo JText::alt('JALL', 'language'); ?>
-								<?php else:?>
-									<?php echo $item->language_title ? JHtml::_('image', 'mod_languages/' . $item->language_image . '.gif', $item->language_title, array('title' => $item->language_title), true) . '&nbsp;' . $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
-								<?php endif;?>
+
+							<td class="center hidden-phone">
+								<?php
+								$link='JUri::root() . 'index.php?option=com_content&view=article&id=' . $item->id . '&share=' . $token';
+                                echo JHtml::_('link', $link,'View the Shared Draft'); ?>
 							</td>
 							<td class="nowrap small hidden-phone">
 								<?php echo JHtml::_('date', $item->created, JText::_('DATE_FORMAT_LC4')); ?>
 							</td>
-							<td class="center hidden-phone">
-								<?php echo (int) $item->hits; ?>
-							</td>
+
 							<td class="center hidden-phone">
 								<?php echo (int) $item->id; ?>
 							</td>
+
+
 						</tr>
 					<?php endforeach; ?>
 					</tbody>
