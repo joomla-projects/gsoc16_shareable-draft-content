@@ -70,7 +70,7 @@ class ContentViewShared extends JViewLegacy
 	{
 		$state = $this->get('State');
 		$canDo = JHelperContent::getActions('com_content', 'category', $this->state->get('filter.category_id'));
-		JToolbarHelper::title(JText::_('COM_CONTENT_SHARED_TITLE'));
+		JToolbarHelper::title(JText::_('COM_CONTENT_SHARED_TITLE', 'share'));
 		
 		if ($canDo->get('core.create'))
 		{
@@ -86,6 +86,7 @@ class ContentViewShared extends JViewLegacy
 			JToolbarHelper::unpublish('articles.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 			JToolbarHelper::custom('articles.unfeatured', 'unfeatured.png', 'featured_f2.png', 'JUNFEATURE', true);
 			JToolbarHelper::archiveList('articles.archive');
+			JToolbarHelper::custom('articles.discardDraft', 'delete.png', 'delete.png', 'COM_CONTENT_DISCARD_DRAFT', true);
 			JToolbarHelper::checkin('articles.checkin');
 		}
 		if ($state->get('filter.published') == -2 && $canDo->get('core.delete'))
