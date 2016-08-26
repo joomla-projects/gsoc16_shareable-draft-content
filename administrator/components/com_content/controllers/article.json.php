@@ -42,7 +42,6 @@ class ContentControllerArticle extends JControllerForm
 	
 		try
 		{
-			// Get the model
 			$return = $this->getModel()->shareToken($articleId);
 		}
 		catch (Exception $e)
