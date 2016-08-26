@@ -601,7 +601,6 @@ class ContentModelArticle extends JModelAdmin
 
 		if (parent::save($data))
 		{
-
 			if (isset($data['featured']))
 			{
 				$this->featured($this->getState($this->getName() . '.id'), $data['featured']);
@@ -704,6 +703,66 @@ class ContentModelArticle extends JModelAdmin
 
 		return true;
 	}
+
+	/**
+	 * Method to get a random token
+	 *
+	 * @return  integer  The share Token
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function shareTokenGenerate()
+	{
+		jimport('joomla.user.helper');
+
+		return JUserHelper::genRandomPassword(16);
+	}
+
+	/**
+	 * Method to store the token generated.
+	 *
+	 * @param   object  $articleId  Gives articleId of the article.
+	 * 
+	 * @return  string  The link with the token
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function shareToken($articleId)
+	{
+		// Checking for valid articleId
+		if ((int) $articleId == 0)
+		{
+			throw new  InvalidArgumentException(JText::_('COM_CONTENT_INVALID_ARTICLEID'));
+
+			return false;
+		}
+
+		$table = $this->getTable('Share', 'ContentTable');
+
+		$query = $this->_db->getQuery(true)
+			->select($this->_db->quoteName('sharetoken'))
+			->from($this->_db->quoteName('#__share_draft'))
+			->where($this->_db->quoteName('articleId') . '=' . $this->_db->quote($articleId));
+
+		$this->_db->setQuery($query);
+		$token = $this->_db->loadResult();
+
+		if (empty($token))
+		{ 
+			$token = $this->shareTokenGenerate();
+			$data = array(
+				'articleId'  => $articleId,
+				'sharetoken' => $token,
+				'created'    => JFactory::getDate()->toSql(),
+			);
+
+			$table->save($data);
+		}
+
+		return JUri::root() . 'index.php?option=com_content&view=article&id=' . $articleId . '&share=' . $token;
+
+	}
+	
 
 	/**
 	 * A protected method to get a set of ordering conditions.

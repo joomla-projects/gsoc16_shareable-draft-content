@@ -64,6 +64,12 @@ if (isset($this->item->attribs['show_urls_images_backend']) && $this->item->attr
 JFactory::getDocument()->addScriptDeclaration('
 	Joomla.submitbutton = function(task)
 	{
+		if (task === "article.shareDraft")
+		{
+			shareDraft();
+			return false;
+		}
+
 		if (task == "article.cancel" || document.formvalidator.isValid(document.getElementById("item-form")))
 		{
 			jQuery("#permissions-sliders select").attr("disabled", "disabled");
@@ -82,12 +88,21 @@ JFactory::getDocument()->addScriptDeclaration('
 $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout = $isModal ? 'modal' : 'edit';
 $tmpl = $isModal ? '&tmpl=component' : '';
+
+JFactory::getDocument()->addScriptDeclaration('
+	var sessionToken = "' . JSession::getFormToken() . '";
+	var articleId    = "' . $this->item->id . '";
+');
+
+JHtml::script('system/share.js', false, true);
+
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_content&layout=' . $layout . $tmpl . '&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 
 	<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
 
+	<div id="shareId"></div>
 	<div class="form-horizontal">
 		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
 
@@ -156,7 +171,7 @@ $tmpl = $isModal ? '&tmpl=component' : '';
 
 		<?php if ($this->canDo->get('core.admin')) : ?>
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('COM_CONTENT_FIELDSET_RULES')); ?>
-				<?php echo $this->form->getInput('rules'); ?>
+			<?php echo $this->form->getInput('rules'); ?>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
 		<?php endif; ?>
 
@@ -166,4 +181,5 @@ $tmpl = $isModal ? '&tmpl=component' : '';
 		<input type="hidden" name="return" value="<?php echo $input->getCmd('return'); ?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
+
 </form>
