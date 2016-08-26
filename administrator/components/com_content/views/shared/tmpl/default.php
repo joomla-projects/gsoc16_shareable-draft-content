@@ -149,7 +149,7 @@ $canOrder  = $user->authorise('core.edit.state', 'com_content.article');
 
 							<td class="center hidden-phone">
 								<?php
-								$link='JUri::root() . 'index.php?option=com_content&view=article&id=' . $item->id . '&share=' . $token';
+								$link= JUri::root() . 'index.php?option=com_content&view=article&id=' . $item->id . '&share=' . $token;
                                 echo JHtml::_('link', $link,'View the Shared Draft'); ?>
 							</td>
 							<td class="nowrap small hidden-phone">
