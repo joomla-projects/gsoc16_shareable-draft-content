@@ -75,7 +75,7 @@ class ContentControllerShared extends ContentControllerArticles
 	 *
 	 * @return  JModel
 	 *
-	 * @since   1.6
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function getModel($name = 'Shared', $prefix = 'ContentModel', $config = array('ignore_request' => true))
 	{
