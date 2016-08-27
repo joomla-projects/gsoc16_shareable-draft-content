@@ -109,23 +109,23 @@ class ContentControllerArticles extends JControllerAdmin
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function discardDraft()
 	{
 		// Check for request forgeries
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
-		$user   = JFactory::getUser();
-		$ids    = $this->input->get('cid', array(), 'array');
+		$ids = $this->input->get('cid', array(), 'array');
 
 		// Access checks.
 		foreach ($ids as $i => $id)
 		{
-			if (!$user->authorise('core.edit.state', 'com_content.article.' . (int) $id))
+			if (!JFactory::getUser()->authorise('core.edit.state', 'com_content.article.' . (int) $id))
 			{
 				// Prune items that you can't change.
 				unset($ids[$i]);
+
 				JError::raiseNotice(403, JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'));
 			}
 		}
@@ -136,7 +136,6 @@ class ContentControllerArticles extends JControllerAdmin
 		}
 		else
 		{
-
 			// Get the model.
 			$model = $this->getModel('articles');
 
@@ -151,11 +150,12 @@ class ContentControllerArticles extends JControllerAdmin
 		if (!$model->discardDraft($ids))
 		{
 			JError::raiseWarning(500, $model->getError());
+
 			return false;
 		}
+
 		$message = JText::plural('COM_CONTENT_N_ITEMS_UNSHARED', count($ids));
 		$this->setRedirect(JRoute::_('index.php?option=com_content&view=shared', false), $message);
-
 
 	}
 

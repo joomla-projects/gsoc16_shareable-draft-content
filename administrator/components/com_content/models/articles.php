@@ -9,6 +9,8 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\Utilities\ArrayHelper;
+
 /**
  * Methods supporting a list of article records.
  *
@@ -394,7 +396,7 @@ class ContentModelArticles extends JModelList
 	/**
 	 * Method to discard Shared Drafts,
 	 * 
-	 * @param   string  $pks  A prefix for the store id.
+	 * @param   array  $pks  A prefix for the store id.
 	 *
 	 * @return  mixed  An array of data items on success, false on failure.
 	 *
@@ -402,13 +404,13 @@ class ContentModelArticles extends JModelList
 	 */
 	public function discardDraft($pks)
 	{
-
 		// Sanitize the ids.
-        JArrayHelper::toInteger($pks);
-		
+		$pks = ArrayHelper::toInteger($pks);
+
 		if (empty($pks))
 		{
 			$this->setError(JText::_('COM_CONTENT_NO_ITEM_SELECTED'));
+
 			return false;
 		}
 
@@ -424,9 +426,10 @@ class ContentModelArticles extends JModelList
 		catch (Exception $e)
 		{
 			$this->setError($e->getMessage());
-			
+
 			return false;
 		}
+
 		return true;
 
 	}
