@@ -46,7 +46,7 @@ class ContentModelShared extends JModelList
 				'featured', 'a.featured',
 				'language', 'a.language',
 				'hits', 'a.hits',
-                'fp.articleId', 'fp.sharetoken',
+				'fp.articleId', 'fp.sharetoken',
 				'publish_up', 'a.publish_up',
 				'publish_down', 'a.publish_down',
 				'published', 'a.published',
@@ -225,5 +225,46 @@ class ContentModelShared extends JModelList
 	protected function populateState($ordering = 'a.title', $direction = 'asc')
 	{
 		parent::populateState($ordering, $direction);
+	}
+
+	/**
+	 * Method to discard Shared Drafts,
+	 * 
+	 * @param   array  $pks  A prefix for the store id.
+	 *
+	 * @return  mixed  An array of data items on success, false on failure.
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function discardDraft($pks)
+	{
+		// Sanitize the ids.
+		$pks = ArrayHelper::toInteger($pks);
+
+		if (empty($pks))
+		{
+			$this->setError(JText::_('COM_CONTENT_NO_ITEM_SELECTED'));
+
+			return false;
+		}
+
+		try
+		{
+			$db = $this->getDbo();
+			$query = $db->getQuery(true)
+				->delete($db->quoteName('#__share_draft'))
+				->where($db->quoteName('articleId') . ' IN (' . implode(',', $pks) . ')');
+			$db->setQuery($query);
+			$db->execute();
+		}
+		catch (Exception $e)
+		{
+			$this->setError($e->getMessage());
+
+			return false;
+		}
+
+		return true;
+
 	}
 }

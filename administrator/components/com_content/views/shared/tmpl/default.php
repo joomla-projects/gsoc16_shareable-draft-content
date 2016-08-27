@@ -20,7 +20,6 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 $canOrder  = $user->authorise('core.edit.state', 'com_content.article');
 
 ?>
-
 <form action="<?php echo JRoute::_('index.php?option=com_content&view=shared'); ?>" method="post" name="adminForm" id="adminForm">
 	<?php if (!empty( $this->sidebar)) : ?>
 		<div id="j-sidebar-container" class="span2">
@@ -55,16 +54,12 @@ $canOrder  = $user->authorise('core.edit.state', 'com_content.article');
 						<th width="50%" class="nowrap center hidden-phone">
 							<?php echo JHtml::_('searchtools.sort', 'COM_CONTENT_SHARE_LINK', 'a.hits', $listDirn, $listOrder); ?>
 						</th>
-
 						<th width="10%" class="nowrap hidden-phone">
 							<?php echo JHtml::_('searchtools.sort', 'JDATE', 'a.created', $listDirn, $listOrder); ?>
 						</th>
-
-
 						<th width="1%" class="nowrap hidden-phone">
 							<?php echo JHtml::_('searchtools.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 						</th>
-
 					</tr>
 				</thead>
 				<tfoot>
@@ -138,21 +133,16 @@ $canOrder  = $user->authorise('core.edit.state', 'com_content.article');
 									</div>
 								</div>
 							</td>
-
 							<td class="center hidden-phone">
-								<?php
-								$link= JUri::root() . 'index.php?option=com_content&view=article&id=' . $item->id . '&share=' . $this->sharetoken;
-                                echo JHtml::_('link', $link, JText::_('COM_CONTENT_SHARED_DRAFT_VIEW')); ?>
+								<?php $link= JUri::root() . 'index.php?option=com_content&view=article&id=' . $item->id . '&share=' . $this->sharetoken; ?>
+								<?php echo JHtml::_('link', $link, JText::_('COM_CONTENT_SHARED_DRAFT_VIEW')); ?>
 							</td>
 							<td class="nowrap small hidden-phone">
 								<?php echo JHtml::_('date', $item->created, JText::_('DATE_FORMAT_LC4')); ?>
 							</td>
-
 							<td class="center hidden-phone">
 								<?php echo (int) $item->id; ?>
 							</td>
-
-
 						</tr>
 					<?php endforeach; ?>
 				</tbody>
@@ -160,7 +150,6 @@ $canOrder  = $user->authorise('core.edit.state', 'com_content.article');
 		<?php endif; ?>
 
 		<input type="hidden" name="task" value="" />
-		<input type="hidden" name="featured" value="1" />
 		<input type="hidden" name="boxchecked" value="0" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>

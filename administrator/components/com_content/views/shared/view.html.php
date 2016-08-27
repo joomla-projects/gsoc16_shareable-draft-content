@@ -95,12 +95,7 @@ class ContentViewShared extends JViewLegacy
 
 		if ($canDo->get('core.edit.state'))
 		{
-			JToolbarHelper::publish('articles.publish', 'JTOOLBAR_PUBLISH', true);
-			JToolbarHelper::unpublish('articles.unpublish', 'JTOOLBAR_UNPUBLISH', true);
-			JToolbarHelper::custom('articles.unfeatured', 'unfeatured.png', 'featured_f2.png', 'JUNFEATURE', true);
-			JToolbarHelper::archiveList('articles.archive');
-			JToolbarHelper::custom('articles.discardDraft', 'delete.png', 'delete.png', 'COM_CONTENT_DISCARD_DRAFT', true);
-			JToolbarHelper::checkin('articles.checkin');
+			JToolbarHelper::custom('shared.discardDraft', 'delete.png', 'delete.png', 'COM_CONTENT_DISCARD_DRAFT', true);
 		}
 
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
