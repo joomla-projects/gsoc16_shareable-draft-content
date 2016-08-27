@@ -18,28 +18,28 @@ require_once __DIR__ . '/articles.php';
 class ContentControllerShared extends ContentControllerArticles
 {
 	/**
-	 * Removes an item.
+	 * Method to discard shared drafts.
 	 *
 	 * @return  void
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function delete()
+	public function discardDraft()
 	{
 		// Check for request forgeries
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
-		$ids  = $this->input->get('cid', array(), 'array');
+		$ids = $this->input->get('cid', array(), 'array');
 
 		// Access checks.
 		foreach ($ids as $i => $id)
 		{
-			if (!JFactory::getUser()->authorise('core.delete', 'com_content.article.' . (int) $id))
+			if (!JFactory::getUser()->authorise('core.edit.state', 'com_content.article.' . (int) $id))
 			{
-				// Prune items that you can't delete.
+				// Prune items that you can't change.
 				unset($ids[$i]);
 
-				JError::raiseNotice(403, JText::_('JERROR_CORE_DELETE_NOT_PERMITTED'));
+				JError::raiseNotice(403, JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'));
 			}
 		}
 
@@ -52,27 +52,33 @@ class ContentControllerShared extends ContentControllerArticles
 			// Get the model.
 			$model = $this->getModel();
 
-			// Remove the items.
-			if (!$model->shared($ids, 0))
+			// Discard the drafts.
+			if (!$model->discardDraft($ids))
 			{
 				JError::raiseWarning(500, $model->getError());
+
+				return false;
 			}
 		}
 
-		$this->setRedirect('index.php?option=com_content&view=shared');
+		$message = JText::plural('COM_CONTENT_N_ITEMS_UNSHARED', count($ids));
+		$this->setRedirect(JRoute::_('index.php?option=com_content&view=shared', false), $message);
+
 	}
 
 	/**
-	 * Method to publish a list of articles.
+	 * Proxy for getModel.
 	 *
-	 * @return  void
+	 * @param   string  $name    The model name. Optional.
+	 * @param   string  $prefix  The class prefix. Optional.
+	 * @param   array   $config  The array of possible config values. Optional.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @return  JModel
+	 *
+	 * @since   1.6
 	 */
-	public function publish()
+	public function getModel($name = 'Shared', $prefix = 'ContentModel', $config = array('ignore_request' => true))
 	{
-		parent::publish();
-
-		$this->setRedirect('index.php?option=com_content&view=shared');
+		return parent::getModel($name, $prefix, $config);
 	}
 }
