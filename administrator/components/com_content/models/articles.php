@@ -394,13 +394,13 @@ class ContentModelArticles extends JModelList
 	/**
 	 * Method to discard Shared Drafts,
 	 * 
-	 * @param  $pk  A prefix for the passing ids.
+	 * @param   string  $pks  A prefix for the store id.
 	 *
 	 * @return  mixed  An array of data items on success, false on failure.
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function discardDraft($pk)
+	public function discardDraft($pks)
 	{
 
 		// Sanitize the ids.
