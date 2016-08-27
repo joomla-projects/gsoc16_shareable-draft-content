@@ -81,7 +81,7 @@ class ContentViewShared extends JViewLegacy
 	{
 		$canDo = JHelperContent::getActions('com_content', 'category', $this->state->get('filter.category_id'));
 
-		JToolbarHelper::title(JText::_('COM_CONTENT_SHARED_TITLE', 'share'));
+		JToolbarHelper::title(JText::_('COM_CONTENT_SHARED_TITLE'), 'share');
 
 		if ($canDo->get('core.create'))
 		{
