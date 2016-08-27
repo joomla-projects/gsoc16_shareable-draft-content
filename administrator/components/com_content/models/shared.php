@@ -46,7 +46,7 @@ class ContentModelShared extends JModelList
 				'featured', 'a.featured',
 				'language', 'a.language',
 				'hits', 'a.hits',
-                'fp.articleId', 'fp.sharetoken',
+				'fp.articleId', 'fp.sharetoken',
 				'publish_up', 'a.publish_up',
 				'publish_down', 'a.publish_down',
 				'published', 'a.published',
