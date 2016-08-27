@@ -404,7 +404,7 @@ class ContentModelArticles extends JModelList
 	{
 
 		// Sanitize the ids.
-		$pks = JArrayHelper::toInteger($pks);
+        JArrayHelper::toInteger($pks);
 		
 		if (empty($pks))
 		{

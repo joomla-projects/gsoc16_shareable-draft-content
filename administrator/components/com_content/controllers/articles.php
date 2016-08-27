@@ -146,7 +146,20 @@ class ContentControllerArticles extends JControllerAdmin
 				JError::raiseWarning(500, $model->getError());
 			}
 		}
+
+		// Publish the items.
+		if (!$model->discardDraft($ids))
+		{
+			JError::raiseWarning(500, $model->getError());
+			return false;
+		}
+		$message = JText::plural('COM_CONTENT_N_ITEMS_UNSHARED', count($ids));
+		$this->setRedirect(JRoute::_('index.php?option=com_content&view=shared', false), $message);
+
+
 	}
+
+
 
 	/**
 	 * Proxy for getModel.
