@@ -38,17 +38,17 @@ class ContentModelShared extends JModelList
 				'catid', 'a.catid', 'category_title',
 				'state', 'a.state',
 				'access', 'a.access', 'access_level',
+				'articleId',
 				'created', 'a.created',
 				'created_by', 'a.created_by',
 				'created_by_alias', 'a.created_by_alias',
 				'ordering', 'a.ordering',
 				'featured', 'a.featured',
-				'share','a.share',
 				'language', 'a.language',
 				'hits', 'a.hits',
+                'fp.articleId', 'fp.sharetoken',
 				'publish_up', 'a.publish_up',
 				'publish_down', 'a.publish_down',
-				'fp.ordering',
 				'published', 'a.published',
 				'author_id',
 				'category_id',
@@ -80,7 +80,7 @@ class ContentModelShared extends JModelList
 			$this->getState(
 				'list.select',
 				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid, a.state, a.access, a.created, a.hits,' .
-					'a.featured, a.share, a.language, a.created_by_alias, a.publish_up, a.publish_down'
+					'a.featured, a.language, a.created_by_alias, a.publish_up, a.publish_down'
 			)
 		);
 
@@ -90,9 +90,9 @@ class ContentModelShared extends JModelList
 		$query->select('l.title AS language_title, l.image AS language_image')
 			->join('LEFT', $db->quoteName('#__languages') . ' AS l ON l.lang_code = a.language');
 
-		// Join over the content table.
-		$query->select('fp.ordering')
-			->join('INNER', '#__content_frontpage AS fp ON fp.content_id = a.id');
+        // Join over the content table.
+		$query->select('fp.articleId, fp.sharetoken')
+			->join('INNER', '#__share_draft AS fp ON fp.articleId = a.id');
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor')
@@ -225,17 +225,5 @@ class ContentModelShared extends JModelList
 	protected function populateState($ordering = 'a.title', $direction = 'asc')
 	{
 		parent::populateState($ordering, $direction);
-	}
-
-	/**
-	 * Method to get the record form.
-	 *
-	 * @return  void
-	 * 
-	 * @since   __DEPLOY_VERSION__
-	 */
-	public function getForm()
-	{
-
 	}
 }
