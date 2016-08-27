@@ -405,8 +405,13 @@ class ContentModelArticles extends JModelList
 	public function discardDraft($pks)
 	{
 		// Sanitize the ids.
+<<<<<<< HEAD
 		$pks = ArrayHelper::toInteger($pks);
 
+=======
+        JArrayHelper::toInteger($pks);
+		
+>>>>>>> bc6256286176074989aeca663436f1a282c66919
 		if (empty($pks))
 		{
 			$this->setError(JText::_('COM_CONTENT_NO_ITEM_SELECTED'));
