@@ -601,7 +601,6 @@ class ContentModelArticle extends JModelAdmin
 
 		if (parent::save($data))
 		{
-
 			if (isset($data['featured']))
 			{
 				$this->featured($this->getState($this->getName() . '.id'), $data['featured']);
@@ -703,6 +702,53 @@ class ContentModelArticle extends JModelAdmin
 		$this->cleanCache();
 
 		return true;
+	}
+	
+	/**
+	 * Method to store the token generated.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @since 3.7
+	 */
+	private function shareTokenGenerate()
+	{
+		jimport('joomla.user.helper');
+		$token = JUserHelper::genRandomPassword(16);
+
+		return $token;
+	}
+
+	/**
+	 * Method to store the token generated.
+	 *
+	 * @param   string  $title  The title of the shared article.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @since   3.7
+	 */
+	public function shareToken($title)
+	{
+		$table = $this->getTable('share', 'ContentTable');
+		$token = $this->shareTokenGenerate();
+
+		try
+		{
+			$db = $this->getDbo();
+			$query = $db->getQuery(true);
+
+			$data = array('articleId'=>$this->get('id'), 'title'=>$title, 'sharetoken'=>$token);
+			
+			$db->setQuery($query);
+			$table->save($data);
+
+			return $db->execute();
+		}
+		catch (Exception $e)
+		{
+			throw new RuntimeException($e->getMessage());
+		}
 	}
 
 	/**
